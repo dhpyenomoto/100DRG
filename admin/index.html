@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>管理画面 ｜ 翌月のおまかせ 編集 ｜ 祥瑞</title>
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#14110C">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%2314110C'/%3E%3Crect x='10' y='10' width='44' height='44' fill='none' stroke='%23B8924A' stroke-width='1.5'/%3E%3Ctext x='32' y='44' font-family='serif' font-size='34' fill='%23D9BC84' text-anchor='middle'%3E百%3C/text%3E%3C/svg%3E">
+<style>
+:root{--sumi:#14110C;--sumi-2:#1C1813;--sumi-3:#241F18;--gold:#B8924A;--gold-l:#D9BC84;--gold-d:#8C6E36;--cream:#ECE4D4;--cream-dim:#A2967F;--line:#06C755;--err:#C0613A;--ok:#6B8E5A}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--sumi);color:var(--cream);font-family:"Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased;padding-bottom:96px}
+a{color:var(--gold-l)}
+code{font-family:ui-monospace,monospace;font-size:.86em;color:var(--gold-l)}
+header{padding:18px 20px;border-bottom:1px solid rgba(184,146,74,.25);position:sticky;top:0;background:rgba(20,17,12,.96);backdrop-filter:blur(6px);z-index:10}
+header h1{font-size:1.02rem;font-weight:600;letter-spacing:.04em}
+header h1 small{display:block;font-size:.68rem;color:var(--gold);letter-spacing:.2em;font-weight:400;margin-bottom:3px}
+.bar{max-width:1000px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.bar .acts{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.who{font-size:.74rem;color:var(--cream-dim)}
+main{max-width:1000px;margin:0 auto;padding:20px}
+.note{background:var(--sumi-2);border:1px solid rgba(184,146,74,.25);border-left:3px solid var(--gold);padding:13px 16px;font-size:.82rem;color:var(--cream-dim);margin-bottom:20px;border-radius:3px}
+.note b{color:var(--gold-l)}
+.note.fb{border-left-color:var(--ok)}
+.grid{display:grid;gap:22px;grid-template-columns:1fr}
+@media(min-width:880px){.grid{grid-template-columns:1.1fr .9fr}}
+.col h2{font-size:.76rem;letter-spacing:.2em;color:var(--gold);text-transform:uppercase;border-bottom:1px solid rgba(184,146,74,.2);padding-bottom:8px;margin-bottom:16px}
+.field{margin-bottom:14px}
+.field.row2{display:flex;gap:12px}.field.row2>div{flex:1}
+.field label{display:block;font-size:.74rem;color:var(--gold-l);margin-bottom:5px;letter-spacing:.04em}
+.field input[type=text],.field textarea{width:100%;background:var(--sumi-3);border:1px solid rgba(184,146,74,.3);color:var(--cream);padding:9px 11px;font-size:.9rem;font-family:inherit;border-radius:3px}
+.field textarea{min-height:80px;resize:vertical;line-height:1.7}
+.field input:focus,.field textarea:focus{outline:none;border-color:var(--gold)}
+.store-card{background:var(--sumi-2);border:1px solid rgba(184,146,74,.22);border-radius:4px;padding:16px;margin-bottom:16px}
+.store-card .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.store-card .top .idx{font-size:.7rem;color:var(--gold);letter-spacing:.16em}
+.store-card .top .pglink{font-size:.72rem}
+.imgrow{display:flex;gap:12px;align-items:flex-start;flex-wrap:wrap}
+.thumb{width:120px;height:90px;background:#0f0d09 center/cover no-repeat;border:1px solid rgba(184,146,74,.3);border-radius:3px;flex:0 0 auto;display:flex;align-items:center;justify-content:center;font-size:.68rem;color:var(--cream-dim)}
+.imgrow .imgctl{flex:1;min-width:180px}
+.btn{font-family:inherit;cursor:pointer;border:1px solid var(--gold-d);background:rgba(184,146,74,.08);color:var(--gold-l);padding:9px 15px;font-size:.82rem;border-radius:3px;letter-spacing:.04em;transition:.2s}
+.btn:hover{background:rgba(184,146,74,.18);border-color:var(--gold)}
+.btn.primary{background:var(--gold);color:#1a1610;border-color:var(--gold);font-weight:700}
+.btn.primary:hover{filter:brightness(1.07)}
+.btn.danger{border-color:var(--err);color:#e69b76;background:transparent}
+.btn.sm{padding:6px 11px;font-size:.76rem}
+.btn[hidden]{display:none}
+.filebtn{position:relative;overflow:hidden;display:inline-block}
+.filebtn input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer}
+.preview{background:#0f0d09;border:1px solid rgba(184,146,74,.22);border-radius:4px;padding:16px;position:sticky;top:78px}
+.pv-card{border:1px solid rgba(184,146,74,.28);border-radius:3px;overflow:hidden;margin-bottom:14px;background:var(--sumi-2)}
+.pv-photo{aspect-ratio:4/3;background:#0f0d09 center/cover no-repeat;display:flex;align-items:center;justify-content:center;color:var(--cream-dim);font-size:.78rem;border-bottom:1px solid rgba(184,146,74,.2)}
+.pv-body{padding:13px 15px 16px}
+.pv-head{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.pv-brand{font-weight:700;color:var(--cream)}
+.pv-store{font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}
+.pv-genre{display:inline-block;font-size:.66rem;color:var(--gold-l);border:1px solid var(--gold-d);padding:2px 8px;margin-top:7px}
+.pv-dish{font-size:1.04rem;font-weight:600;margin-top:9px;color:var(--cream)}
+.pv-desc{font-size:.8rem;color:var(--cream-dim);margin-top:7px;line-height:1.8}
+.savebar{position:fixed;left:0;right:0;bottom:0;background:rgba(20,17,12,.97);border-top:1px solid rgba(184,146,74,.3);padding:12px 20px;z-index:20;backdrop-filter:blur(6px)}
+.savebar .inner{max-width:1000px;margin:0 auto;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.savebar .status{font-size:.78rem;color:var(--cream-dim);margin-left:auto}
+.savebar .status.ok{color:#9ec48a}.savebar .status.err{color:#e69b76}
+dialog{background:var(--sumi-2);color:var(--cream);border:1px solid var(--gold-d);border-radius:6px;max-width:680px;width:92%;padding:0}
+dialog::backdrop{background:rgba(0,0,0,.65)}
+dialog .dlg-h{padding:16px 20px;border-bottom:1px solid rgba(184,146,74,.2);font-weight:600}
+dialog .dlg-b{padding:18px 20px}
+dialog textarea{width:100%;min-height:260px;background:var(--sumi-3);color:var(--cream);border:1px solid rgba(184,146,74,.3);border-radius:3px;padding:12px;font-family:ui-monospace,monospace;font-size:.8rem;line-height:1.5}
+dialog .dlg-f{padding:14px 20px;border-top:1px solid rgba(184,146,74,.2);display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap}
+/* login */
+#login .dlg-b{padding:22px 22px}
+#login .field input{font-size:1rem}
+#login .lerr{color:#e69b76;font-size:.82rem;margin-top:8px;min-height:1.2em}
+</style>
+</head>
+<body>
+<header>
+  <div class="bar">
+    <h1><small>SHONZUI ADMIN</small>翌月のおまかせ 編集</h1>
+    <div class="acts">
+      <span class="who" id="who"></span>
+      <button class="btn sm" id="btnReload">読み込み直す</button>
+      <button class="btn sm" id="btnLogout" hidden>ログアウト</button>
+      <a class="btn sm" href="../index.html" target="_blank" rel="noopener">公開サイト ↗</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="note" id="modeBanner"></div>
+
+  <div class="grid">
+    <div class="col">
+      <h2>編集</h2>
+      <div class="field">
+        <label>更新月の表示（例：2026年6月）</label>
+        <input type="text" id="f-updated" placeholder="2026年6月">
+      </div>
+      <div id="stores"></div>
+      <button class="btn sm" id="btnAdd">＋ 店舗を追加</button>
+    </div>
+    <div class="col">
+      <h2>プレビュー</h2>
+      <div class="preview" id="preview"></div>
+    </div>
+  </div>
+</main>
+
+<div class="savebar">
+  <div class="inner">
+    <button class="btn primary" id="btnPublish">公開</button>
+    <button class="btn" id="btnDraft">下書き保存</button>
+    <button class="btn" id="btnExport">JSON書き出し</button>
+    <span class="status" id="status"></span>
+  </div>
+</div>
+
+<dialog id="dlg">
+  <div class="dlg-h">公開用 JSON（data/omakase.json）</div>
+  <div class="dlg-b">
+    <p style="font-size:.8rem;color:var(--cream-dim);margin-bottom:10px">下記を <code>data/omakase.json</code> に保存（差し替え）すると公開されます。</p>
+    <textarea id="dlg-json" readonly></textarea>
+  </div>
+  <div class="dlg-f">
+    <button class="btn" id="dlg-copy">コピー</button>
+    <button class="btn primary" id="dlg-download">omakase.json をダウンロード</button>
+    <button class="btn" id="dlg-close">閉じる</button>
+  </div>
+</dialog>
+
+<dialog id="login">
+  <div class="dlg-h">管理者ログイン</div>
+  <div class="dlg-b">
+    <div class="field"><label>メールアドレス</label><input type="text" id="l-email" autocomplete="username"></div>
+    <div class="field"><label>パスワード</label><input type="password" id="l-pass" autocomplete="current-password"></div>
+    <div class="lerr" id="l-err"></div>
+  </div>
+  <div class="dlg-f">
+    <button class="btn primary" id="l-go">ログイン</button>
+  </div>
+</dialog>
+
+<script src="../assets/site-config.js"></script>
+<script type="module">
+const FB_VER="10.12.0";
+const LS_KEY="shonzui_omakase_draft";
+const DEFAULT={updated:"",stores:[
+  {id:"daikouya-kitashinchi",brand:"大嵓埜",store:"北新地",genre:"懐石料理",month:"",dish:"",description:"",image:""},
+  {id:"daikouya-kamishichiken",brand:"大嵓埜",store:"上七軒",genre:"寿司懐石",month:"",dish:"",description:"",image:""},
+  {id:"zenen",brand:"禅園",store:"心斎橋・西梅田（両店共通）",genre:"懐石・割烹",month:"",dish:"",description:"",image:""},
+  {id:"lartisan-kanoya",brand:"L'Artisan Kanoya",store:"",genre:"フレンチ",month:"",dish:"",description:"",image:""}
+]};
+const FB_CFG = (window.SITE_CONFIG && window.SITE_CONFIG.firebase) || null;
+let data=null, FB=null, user=null;
+
+const $=id=>document.getElementById(id);
+const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const slugify=s=>(s||"store").trim().toLowerCase().replace(/['’\s]+/g,"-").replace(/[^a-z0-9\-一-龠ぁ-んァ-ヶ]/g,"").slice(0,48)||"store";
+function setStatus(msg,kind){const s=$('status');s.className="status"+(kind?" "+kind:"");s.textContent=msg;if(msg){setTimeout(()=>{if(s.textContent===msg){s.textContent="";s.className="status"}},3500)}}
+
+/* ---------- Firebase (任意) ---------- */
+async function initFirebase(){
+  const [appM,authM,fsM,stM]=await Promise.all([
+    import(`https://www.gstatic.com/firebasejs/${FB_VER}/firebase-app.js`),
+    import(`https://www.gstatic.com/firebasejs/${FB_VER}/firebase-auth.js`),
+    import(`https://www.gstatic.com/firebasejs/${FB_VER}/firebase-firestore.js`),
+    import(`https://www.gstatic.com/firebasejs/${FB_VER}/firebase-storage.js`)
+  ]);
+  const app=appM.initializeApp(FB_CFG);
+  FB={app,auth:authM.getAuth(app),db:fsM.getFirestore(app),st:stM.getStorage(app),m:{...authM,...fsM,...stM}};
+  FB.m.onAuthStateChanged(FB.auth,u=>{
+    user=u;
+    $('btnLogout').hidden=!u;
+    $('who').textContent=u?("ログイン中："+(u.email||"")):"";
+    if(u){ try{$('login').close()}catch(e){} loadData(); }
+    else { showLogin(); }
+  });
+}
+function showLogin(){const d=$('login');if(!d.open)d.showModal();}
+async function fbLoad(){
+  const ref=FB.m.doc(FB.db,"content","omakase");
+  const snap=await FB.m.getDoc(ref);
+  if(snap.exists())return snap.data();
+  return JSON.parse(JSON.stringify(DEFAULT));
+}
+async function fbSave(payload){
+  await FB.m.setDoc(FB.m.doc(FB.db,"content","omakase"),payload);
+}
+async function fbUpload(file,id){
+  const ext=(file.name.split('.').pop()||"jpg").toLowerCase();
+  const path=`menu/${id||"img"}-${Date.now()}.${ext}`;
+  const r=FB.m.ref(FB.st,path);
+  await FB.m.uploadBytes(r,file);
+  return await FB.m.getDownloadURL(r);
+}
+
+/* ---------- データ読込 ---------- */
+async function loadData(){
+  if(FB && user){ try{data=await fbLoad()}catch(e){data=JSON.parse(JSON.stringify(DEFAULT));console.warn(e)} renderAll(); return; }
+  if(!FB){
+    const draft=localStorage.getItem(LS_KEY);
+    if(draft){try{data=JSON.parse(draft);renderAll();setStatus("下書きを読み込みました");return}catch(e){}}
+    try{const r=await fetch('../data/omakase.json',{cache:'no-store'});if(!r.ok)throw 0;data=await r.json()}
+    catch(e){data=JSON.parse(JSON.stringify(DEFAULT))}
+    renderAll();
+  }
+}
+async function reloadFromSource(){
+  if(!confirm("公開中の内容を読み込み直します。未保存の編集は失われます。よろしいですか？"))return;
+  if(FB && user){ try{data=await fbLoad();renderAll();setStatus("公開中の内容を読み込みました","ok")}catch(e){setStatus("読込に失敗しました","err")} return; }
+  localStorage.removeItem(LS_KEY);
+  try{const r=await fetch('../data/omakase.json',{cache:'no-store'});data=await r.json()}catch(e){data=JSON.parse(JSON.stringify(DEFAULT))}
+  renderAll();setStatus("公開中のJSONを読み込みました","ok");
+}
+
+/* ---------- 描画 ---------- */
+function renderAll(){ $('f-updated').value=data.updated||""; renderStores(); renderPreview(); }
+function fieldRow(i,k,label,val,ph){return `<div><label>${label}</label><input type="text" data-k="${k}" data-i="${i}" value="${esc(val)}" placeholder="${ph||''}"></div>`}
+function renderStores(){
+  $('stores').innerHTML=(data.stores||[]).map((s,i)=>`
+    <div class="store-card" data-i="${i}">
+      <div class="top"><span class="idx">エントリー ${i+1}</span>
+        <span class="pglink"><a href="../menu.html?id=${encodeURIComponent(s.id||'')}" target="_blank" rel="noopener">ページを開く ↗</a>
+        &nbsp;<button class="btn danger sm" data-act="del" data-i="${i}">削除</button></span></div>
+      <div class="field row2">${fieldRow(i,"brand","ブランド",s.brand,"大嵓埜")}${fieldRow(i,"store","店舗／表示名",s.store,"北新地")}</div>
+      <div class="field row2">${fieldRow(i,"genre","ジャンル",s.genre,"懐石料理 / 寿司懐石 / フレンチ")}${fieldRow(i,"month","対象月",s.month,"2026年7月")}</div>
+      ${fieldRow(i,"dish","料理名（おまかせ）",s.dish,"鱧と賀茂茄子の炊き合わせ")}
+      <div class="field"><label>概要・説明</label><textarea data-k="description" data-i="${i}" placeholder="一皿の説明を入力">${esc(s.description)}</textarea></div>
+      <div class="field"><label>料理写真</label>
+        <div class="imgrow">
+          <div class="thumb" style="${s.image?`background-image:url('${esc(s.image)}')`:''}">${s.image?'':'No Image'}</div>
+          <div class="imgctl">
+            <input type="text" data-k="image" data-i="${i}" value="${esc(s.image)}" placeholder="画像URL（例：assets/menu/xxx.jpg）">
+            <div style="display:flex;gap:8px;margin-top:8px">
+              <span class="btn sm filebtn">アップロード<input type="file" accept="image/*" data-up="${i}"></span>
+              ${s.image?`<button class="btn sm" data-act="clrimg" data-i="${i}">画像をクリア</button>`:''}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>`).join("");
+}
+function renderPreview(){
+  const cards=(data.stores||[]).map(s=>`
+    <div class="pv-card">
+      <div class="pv-photo" style="${s.image?`background-image:url('${esc(s.image)}')`:''}">${s.image?'':'準備中'}</div>
+      <div class="pv-body">
+        <div class="pv-head"><span class="pv-brand">${esc(s.brand)||esc(s.store)}</span><span class="pv-store">${esc(s.store)}</span></div>
+        ${s.genre?`<span class="pv-genre">${esc(s.genre)}</span>`:''}
+        <div class="pv-dish">${esc(s.dish)||'準備中'}</div>
+        ${s.description?`<div class="pv-desc">${esc(s.description)}</div>`:''}
+      </div>
+    </div>`).join("");
+  $('preview').innerHTML=(data.updated?`<p style="font-size:.76rem;color:var(--cream-dim);margin-bottom:12px">更新：${esc(data.updated)}</p>`:"")+cards;
+}
+
+/* ---------- 入力ハンドラ ---------- */
+$('f-updated').addEventListener('input',e=>{data.updated=e.target.value;renderPreview()});
+$('stores').addEventListener('input',e=>{
+  const k=e.target.dataset.k,i=e.target.dataset.i;
+  if(k!=null&&i!=null){data.stores[i][k]=e.target.value;if(k==='image')renderStores();renderPreview()}
+});
+$('stores').addEventListener('click',e=>{
+  const act=e.target.dataset.act,i=e.target.dataset.i;
+  if(act==='del'&&confirm("このエントリーを削除しますか？")){data.stores.splice(i,1);renderStores();renderPreview()}
+  if(act==='clrimg'){data.stores[i].image="";renderStores();renderPreview()}
+});
+$('stores').addEventListener('change',async e=>{
+  const i=e.target.dataset.up;
+  if(i==null||!e.target.files||!e.target.files[0])return;
+  const file=e.target.files[0];
+  if(FB && user){
+    try{setStatus("画像をアップロード中…");const url=await fbUpload(file,data.stores[i].id);data.stores[i].image=url;renderStores();renderPreview();setStatus("画像をアップロードしました","ok")}
+    catch(err){console.warn(err);setStatus("アップロードに失敗しました","err")}
+  }else{
+    if(file.size>1.5*1024*1024 && !confirm("画像が大きめです（"+Math.round(file.size/1024)+"KB）。埋め込むとJSONが重くなります。続けますか？\n※本番では画像URL（assets/）またはFirebase連携を推奨します。"))return;
+    const fr=new FileReader();fr.onload=()=>{data.stores[i].image=fr.result;renderStores();renderPreview();setStatus("画像を読み込みました")};fr.readAsDataURL(file);
+  }
+});
+$('btnAdd').addEventListener('click',()=>{data.stores.push({id:"",brand:"",store:"",genre:"",month:"",dish:"",description:"",image:""});renderStores();renderPreview()});
+
+/* ---------- 保存・公開 ---------- */
+function finalized(){
+  const out=JSON.parse(JSON.stringify(data));
+  (out.stores||[]).forEach((s,i)=>{if(!s.id)s.id=slugify(s.brand+"-"+s.store)||("entry-"+i)});
+  return out;
+}
+const jsonText=()=>JSON.stringify(finalized(),null,2)+"\n";
+$('btnDraft').addEventListener('click',()=>{localStorage.setItem(LS_KEY,JSON.stringify(finalized()));setStatus("下書きを保存しました（この端末）","ok")});
+$('btnExport').addEventListener('click',()=>{$('dlg-json').value=jsonText();$('dlg').showModal()});
+$('btnPublish').addEventListener('click',async()=>{
+  if(FB){
+    if(!user){showLogin();return;}
+    try{setStatus("公開中…");await fbSave(finalized());setStatus("公開しました（即時反映）","ok")}
+    catch(e){console.warn(e);setStatus("公開に失敗しました","err")}
+  }else{
+    $('dlg-json').value=jsonText();$('dlg').showModal();
+  }
+});
+$('btnReload').addEventListener('click',reloadFromSource);
+$('dlg-close').addEventListener('click',()=>$('dlg').close());
+$('dlg-copy').addEventListener('click',async()=>{try{await navigator.clipboard.writeText($('dlg-json').value);setStatus("コピーしました","ok")}catch(e){setStatus("コピーできませんでした","err")}});
+$('dlg-download').addEventListener('click',()=>{
+  const blob=new Blob([$('dlg-json').value],{type:"application/json"});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download="omakase.json";a.click();URL.revokeObjectURL(a.href);setStatus("ダウンロードしました","ok");
+});
+
+/* ---------- ログイン ---------- */
+$('l-go').addEventListener('click',async()=>{
+  if(!FB)return;
+  $('l-err').textContent="";
+  try{await FB.m.signInWithEmailAndPassword(FB.auth,$('l-email').value.trim(),$('l-pass').value)}
+  catch(e){$('l-err').textContent="ログインできませんでした。メール／パスワードをご確認ください。";console.warn(e)}
+});
+$('l-pass').addEventListener('keydown',e=>{if(e.key==='Enter')$('l-go').click()});
+$('btnLogout').addEventListener('click',async()=>{if(FB){await FB.m.signOut(FB.auth);setStatus("ログアウトしました")}});
+
+/* ---------- 起動 ---------- */
+(function boot(){
+  if(FB_CFG){
+    $('modeBanner').className="note fb";
+    $('modeBanner').innerHTML='<b>バックエンド連携：有効</b>　ログインして編集し、<b>「公開」</b>で即時に会員・訪問者へ反映されます。画像はアップロードでそのまま使用できます。';
+    $('btnPublish').textContent="公開（即時反映）";
+    initFirebase().catch(e=>{
+      console.warn(e);
+      $('modeBanner').className="note";
+      $('modeBanner').innerHTML='Firebaseの初期化に失敗しました。設定値（assets/site-config.js）をご確認ください。静的モードで動作します。';
+      FB=null;loadData();
+    });
+  }else{
+    $('modeBanner').innerHTML='<b>静的モード</b>　編集内容は<b>下書き保存</b>（この端末）できます。公開するには<b>「公開」→「ダウンロード」</b>で <code>data/omakase.json</code> を差し替えてデプロイしてください。<br>※ <code>assets/site-config.js</code> にFirebase設定を入れると、ログイン・即時公開・画像アップロードが有効になります（READMEの手順を参照）。';
+    $('btnPublish').textContent="公開用JSONを書き出す";
+    loadData();
+  }
+})();
+</script>
+</body>
+</html>
