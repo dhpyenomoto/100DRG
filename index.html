@@ -178,6 +178,19 @@ section{position:relative;z-index:1}
 .card .meta{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
 .tag{font-family:var(--serif-ja);font-size:.74rem;color:var(--gold-l);border:1px solid var(--gold-d);padding:5px 12px;letter-spacing:.04em}
 
+/* 今月のおまかせ */
+.om-month{display:inline-block;margin-top:8px;font-family:var(--serif-en);font-size:.74rem;letter-spacing:.18em;color:var(--gold-l);border:1px solid var(--gold-d);padding:5px 14px}
+.omakase-grid{display:flex;flex-direction:column;gap:20px;margin-top:26px}
+.om-card{border:1px solid rgba(184,146,74,.28);background:linear-gradient(180deg,var(--sumi-2),var(--sumi));overflow:hidden}
+.om-photo{aspect-ratio:4/3;background:#0f0d09 center/cover no-repeat;position:relative;border-bottom:1px solid rgba(184,146,74,.2)}
+.om-photo.empty{display:flex;align-items:center;justify-content:center}
+.om-photo.empty::after{content:"準備中";font-family:var(--serif-ja);font-size:.8rem;color:var(--cream-dim);letter-spacing:.2em}
+.om-body{padding:20px 22px 24px}
+.om-store{font-family:var(--serif-en);font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
+.om-dish{font-family:var(--serif-ja);font-weight:600;font-size:1.16rem;color:var(--cream);margin-top:8px;letter-spacing:.04em;line-height:1.5}
+.om-desc{font-size:.84rem;color:var(--cream-dim);margin-top:12px;line-height:1.95}
+@media(min-width:600px){.omakase-grid{flex-direction:row}.om-card{flex:1;display:flex;flex-direction:column}.om-body{flex:1}}
+
 /* plan / fee */
 .plan{border:1px solid var(--gold-d);background:var(--sumi-2);padding:34px 26px;margin-top:26px;text-align:center;position:relative}
 .plan .label{font-family:var(--serif-en);letter-spacing:.28em;font-size:.66rem;text-transform:uppercase;color:var(--gold)}
@@ -318,6 +331,17 @@ footer .legal .sep{color:var(--gold-d);margin:0 8px}
   </div>
 </section>
 
+<!-- 今月のおまかせ -->
+<section class="block-tight" id="omakase">
+  <div class="wrap">
+    <span class="sec-no reveal">— This Month</span>
+    <h2 class="sec-title reveal">今月のおまかせ</h2>
+    <p class="sec-lead reveal" id="omakase-note">季節の一皿を、各店の料理長より。</p>
+    <div class="om-month reveal" id="omakase-month" hidden></div>
+    <div class="omakase-grid" id="omakase-grid"></div>
+  </div>
+</section>
+
 <!-- PLAN -->
 <section class="block">
   <div class="wrap">
@@ -343,6 +367,7 @@ footer .legal .sep{color:var(--gold-d);margin:0 8px}
           <div class="r">会員価格で</div>
         </div>
       </div>
+      <p style="font-size:.72rem;color:var(--cream-dim);margin-top:18px;line-height:1.9;text-align:left">お支払いはクレジットカードのご登録・自動決済です（翌月分を前月末日に課金）。解約は2ヶ月以上前のお申し出で承ります。<a href="tokushoho.html" style="color:var(--gold-l)">特定商取引法に基づく表記</a>をご確認ください。</p>
     </div>
   </div>
 </section>
@@ -457,6 +482,37 @@ window.addEventListener('load',()=>{document.querySelectorAll('.hero .reveal').f
 // LINE placeholder (replace href with real LINE add-friend URL)
 const LINE_URL="#"; // ←ここに公式LINEの友だち追加URLを設定
 document.querySelectorAll('[data-line]').forEach(a=>{if(LINE_URL!=="#")a.href=LINE_URL});
+
+// ===== 今月のおまかせ：data/omakase.json を読み込んで描画 =====
+// 管理画面(admin/)で編集 → JSONを差し替えると、ここに反映される。
+const OMAKASE_FALLBACK={month:"",note:"季節の一皿を、各店の料理長より。",stores:[
+  {store:"大嵓埜 北新地",dish:"",description:"",image:""},
+  {store:"禅園",dish:"",description:"",image:""},
+  {store:"上七軒 大嵓埜",dish:"",description:"",image:""}
+]};
+function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
+function renderOmakase(data){
+  const grid=document.getElementById('omakase-grid');if(!grid)return;
+  const note=document.getElementById('omakase-note');
+  const mo=document.getElementById('omakase-month');
+  if(note&&data.note)note.textContent=data.note;
+  if(mo&&data.month){mo.textContent=data.month+" の一皿";mo.hidden=false}
+  grid.innerHTML=(data.stores||[]).map(s=>{
+    const hasImg=s.image&&s.image.trim()!=="";
+    const photo=hasImg
+      ? `<div class="om-photo" style="background-image:url('${esc(s.image)}')"></div>`
+      : `<div class="om-photo empty"></div>`;
+    return `<article class="om-card">${photo}<div class="om-body">`
+      +`<div class="om-store">${esc(s.store)}</div>`
+      +`<h3 class="om-dish">${esc(s.dish)||"準備中"}</h3>`
+      +(s.description?`<p class="om-desc">${esc(s.description)}</p>`:"")
+      +`</div></article>`;
+  }).join("");
+}
+fetch('data/omakase.json',{cache:'no-store'})
+  .then(r=>{if(!r.ok)throw 0;return r.json()})
+  .then(renderOmakase)
+  .catch(()=>renderOmakase(OMAKASE_FALLBACK));
 </script>
 </body>
 </html>

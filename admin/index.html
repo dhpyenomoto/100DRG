@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>管理画面 ｜ 今月のおまかせ 編集 ｜ 祥瑞</title>
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#14110C">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%2314110C'/%3E%3Crect x='10' y='10' width='44' height='44' fill='none' stroke='%23B8924A' stroke-width='1.5'/%3E%3Ctext x='32' y='44' font-family='serif' font-size='34' fill='%23D9BC84' text-anchor='middle'%3E百%3C/text%3E%3C/svg%3E">
+<style>
+:root{--sumi:#14110C;--sumi-2:#1C1813;--sumi-3:#241F18;--gold:#B8924A;--gold-l:#D9BC84;--gold-d:#8C6E36;--cream:#ECE4D4;--cream-dim:#A2967F;--line:#06C755;--err:#C0613A}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--sumi);color:var(--cream);font-family:"Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased;padding-bottom:90px}
+a{color:var(--gold-l)}
+header{padding:22px 20px;border-bottom:1px solid rgba(184,146,74,.25);position:sticky;top:0;background:rgba(20,17,12,.96);backdrop-filter:blur(6px);z-index:10}
+header h1{font-size:1.05rem;font-weight:600;letter-spacing:.04em}
+header h1 small{display:block;font-size:.7rem;color:var(--gold);letter-spacing:.2em;font-weight:400;margin-bottom:3px}
+.bar{max-width:980px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.bar .acts{display:flex;gap:8px;flex-wrap:wrap}
+main{max-width:980px;margin:0 auto;padding:22px 20px}
+.note{background:var(--sumi-2);border:1px solid rgba(184,146,74,.25);border-left:3px solid var(--gold);padding:14px 16px;font-size:.82rem;color:var(--cream-dim);margin-bottom:22px;border-radius:3px}
+.note b{color:var(--gold-l)}
+.grid{display:grid;gap:22px;grid-template-columns:1fr}
+@media(min-width:860px){.grid{grid-template-columns:1fr 1fr}}
+.col h2{font-size:.78rem;letter-spacing:.2em;color:var(--gold);text-transform:uppercase;border-bottom:1px solid rgba(184,146,74,.2);padding-bottom:8px;margin-bottom:16px}
+.field{margin-bottom:16px}
+.field label{display:block;font-size:.76rem;color:var(--gold-l);margin-bottom:6px;letter-spacing:.04em}
+.field input[type=text],.field textarea{width:100%;background:var(--sumi-3);border:1px solid rgba(184,146,74,.3);color:var(--cream);padding:10px 12px;font-size:.9rem;font-family:inherit;border-radius:3px}
+.field textarea{min-height:84px;resize:vertical;line-height:1.7}
+.field input:focus,.field textarea:focus{outline:none;border-color:var(--gold)}
+.store-card{background:var(--sumi-2);border:1px solid rgba(184,146,74,.22);border-radius:4px;padding:18px;margin-bottom:18px}
+.store-card .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.store-card .top .idx{font-size:.72rem;color:var(--gold);letter-spacing:.18em}
+.imgrow{display:flex;gap:12px;align-items:flex-start;flex-wrap:wrap}
+.thumb{width:120px;height:90px;background:#0f0d09 center/cover no-repeat;border:1px solid rgba(184,146,74,.3);border-radius:3px;flex:0 0 auto;display:flex;align-items:center;justify-content:center;font-size:.7rem;color:var(--cream-dim)}
+.imgrow .imgctl{flex:1;min-width:180px}
+.btn{font-family:inherit;cursor:pointer;border:1px solid var(--gold-d);background:rgba(184,146,74,.08);color:var(--gold-l);padding:9px 16px;font-size:.82rem;border-radius:3px;letter-spacing:.04em;transition:.2s}
+.btn:hover{background:rgba(184,146,74,.18);border-color:var(--gold)}
+.btn.primary{background:var(--gold);color:#1a1610;border-color:var(--gold);font-weight:700}
+.btn.primary:hover{filter:brightness(1.07)}
+.btn.danger{border-color:var(--err);color:#e69b76;background:transparent}
+.btn.sm{padding:6px 12px;font-size:.76rem}
+.filebtn{position:relative;overflow:hidden;display:inline-block}
+.filebtn input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer}
+/* preview */
+.preview{background:#0f0d09;border:1px solid rgba(184,146,74,.22);border-radius:4px;padding:18px;position:sticky;top:84px}
+.pv-month{display:inline-block;font-size:.72rem;letter-spacing:.16em;color:var(--gold-l);border:1px solid var(--gold-d);padding:4px 12px;margin-bottom:14px}
+.pv-card{border:1px solid rgba(184,146,74,.28);border-radius:3px;overflow:hidden;margin-bottom:14px;background:var(--sumi-2)}
+.pv-photo{aspect-ratio:4/3;background:#0f0d09 center/cover no-repeat;display:flex;align-items:center;justify-content:center;color:var(--cream-dim);font-size:.78rem;border-bottom:1px solid rgba(184,146,74,.2)}
+.pv-body{padding:14px 16px 18px}
+.pv-store{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+.pv-dish{font-size:1.08rem;font-weight:600;margin-top:6px;color:var(--cream)}
+.pv-desc{font-size:.82rem;color:var(--cream-dim);margin-top:8px;line-height:1.85}
+/* sticky save bar */
+.savebar{position:fixed;left:0;right:0;bottom:0;background:rgba(20,17,12,.97);border-top:1px solid rgba(184,146,74,.3);padding:12px 20px;z-index:20;backdrop-filter:blur(6px)}
+.savebar .inner{max-width:980px;margin:0 auto;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.savebar .status{font-size:.76rem;color:var(--cream-dim);margin-left:auto}
+dialog{background:var(--sumi-2);color:var(--cream);border:1px solid var(--gold-d);border-radius:6px;max-width:680px;width:92%;padding:0}
+dialog::backdrop{background:rgba(0,0,0,.6)}
+dialog .dlg-h{padding:16px 20px;border-bottom:1px solid rgba(184,146,74,.2);font-weight:600}
+dialog .dlg-b{padding:18px 20px}
+dialog textarea{width:100%;min-height:280px;background:var(--sumi-3);color:var(--cream);border:1px solid rgba(184,146,74,.3);border-radius:3px;padding:12px;font-family:ui-monospace,monospace;font-size:.8rem;line-height:1.5}
+dialog .dlg-f{padding:14px 20px;border-top:1px solid rgba(184,146,74,.2);display:flex;gap:10px;justify-content:flex-end}
+</style>
+</head>
+<body>
+<header>
+  <div class="bar">
+    <h1><small>SHONZUI ADMIN</small>今月のおまかせ 編集</h1>
+    <div class="acts">
+      <button class="btn sm" id="btnReload">読み込み直す</button>
+      <a class="btn sm" href="../index.html" target="_blank" rel="noopener">公開サイトを見る ↗</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="note">
+    各店舗の「今月のおまかせ」を編集できます。<b>下書き保存</b>はこの端末のブラウザに保存され、編集を続けられます。
+    公開サイト（会員・訪問者）へ反映するには、<b>「公開用JSONを書き出す」</b>で <code>data/omakase.json</code> を更新してください。
+    （※現状は静的サイトのため、書き出したJSONの差し替え＝公開です。サーバー連携でワンクリック公開に拡張できます。）
+  </div>
+
+  <div class="grid">
+    <div class="col">
+      <h2>編集</h2>
+      <div class="field">
+        <label>表示する月（例：2026年6月）</label>
+        <input type="text" id="f-month" placeholder="2026年6月">
+      </div>
+      <div class="field">
+        <label>リード文（各店の上に表示）</label>
+        <input type="text" id="f-note" placeholder="季節の一皿を、各店の料理長より。">
+      </div>
+      <div id="stores"></div>
+      <button class="btn sm" id="btnAdd">＋ 店舗を追加</button>
+    </div>
+
+    <div class="col">
+      <h2>プレビュー</h2>
+      <div class="preview" id="preview"></div>
+    </div>
+  </div>
+</main>
+
+<div class="savebar">
+  <div class="inner">
+    <button class="btn primary" id="btnDraft">下書き保存</button>
+    <button class="btn" id="btnExport">公開用JSONを書き出す</button>
+    <button class="btn" id="btnCopy">JSONをコピー</button>
+    <span class="status" id="status"></span>
+  </div>
+</div>
+
+<dialog id="dlg">
+  <div class="dlg-h">公開用 JSON（data/omakase.json）</div>
+  <div class="dlg-b">
+    <p style="font-size:.8rem;color:var(--cream-dim);margin-bottom:10px">下記を <code>data/omakase.json</code> に保存（差し替え）すると公開されます。「ダウンロード」または「コピー」をご利用ください。</p>
+    <textarea id="dlg-json" readonly></textarea>
+  </div>
+  <div class="dlg-f">
+    <button class="btn" id="dlg-copy">コピー</button>
+    <button class="btn primary" id="dlg-download">omakase.json をダウンロード</button>
+    <button class="btn" id="dlg-close">閉じる</button>
+  </div>
+</dialog>
+
+<script>
+const LS_KEY="shonzui_omakase_draft";
+const DEFAULT={month:"",note:"季節の一皿を、各店の料理長より。",stores:[
+  {id:"daikouya-kitashinchi",store:"大嵓埜 北新地",dish:"",description:"",image:""},
+  {id:"zenen",store:"禅園",dish:"",description:"",image:""},
+  {id:"daikouya-kamishichiken",store:"上七軒 大嵓埜",dish:"",description:"",image:""}
+]};
+let data=null;
+
+function setStatus(msg){const s=document.getElementById('status');s.textContent=msg;if(msg){setTimeout(()=>{if(s.textContent===msg)s.textContent=""},3000)}}
+function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
+function slugify(s){return (s||"store").trim().replace(/\s+/g,"-").slice(0,40)||"store"}
+
+function load(){
+  const draft=localStorage.getItem(LS_KEY);
+  if(draft){try{data=JSON.parse(draft);setStatus("下書きを読み込みました");renderAll();return}catch(e){}}
+  fetch('../data/omakase.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw 0;return r.json()})
+    .then(j=>{data=j;renderAll()})
+    .catch(()=>{data=JSON.parse(JSON.stringify(DEFAULT));renderAll()});
+}
+function reloadFromFile(){
+  if(!confirm("公開中のJSONを読み込み直します。未保存の編集内容は失われます。よろしいですか？"))return;
+  localStorage.removeItem(LS_KEY);
+  fetch('../data/omakase.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw 0;return r.json()})
+    .then(j=>{data=j;renderAll();setStatus("公開中のJSONを読み込みました")})
+    .catch(()=>{data=JSON.parse(JSON.stringify(DEFAULT));renderAll();setStatus("初期値を読み込みました")});
+}
+
+function renderAll(){
+  document.getElementById('f-month').value=data.month||"";
+  document.getElementById('f-note').value=data.note||"";
+  renderStores();renderPreview();
+}
+function renderStores(){
+  const wrap=document.getElementById('stores');
+  wrap.innerHTML=(data.stores||[]).map((s,i)=>`
+    <div class="store-card" data-i="${i}">
+      <div class="top"><span class="idx">店舗 ${i+1}</span>
+        <button class="btn danger sm" data-act="del" data-i="${i}">削除</button></div>
+      <div class="field"><label>店舗名</label><input type="text" data-k="store" data-i="${i}" value="${esc(s.store)}" placeholder="大嵓埜 北新地"></div>
+      <div class="field"><label>料理名（今月のおまかせ）</label><input type="text" data-k="dish" data-i="${i}" value="${esc(s.dish)}" placeholder="鱧と賀茂茄子の炊き合わせ"></div>
+      <div class="field"><label>概要・説明</label><textarea data-k="description" data-i="${i}" placeholder="一皿の説明を入力">${esc(s.description)}</textarea></div>
+      <div class="field"><label>料理写真</label>
+        <div class="imgrow">
+          <div class="thumb" style="${s.image?`background-image:url('${esc(s.image)}')`:''}">${s.image?'':'No Image'}</div>
+          <div class="imgctl">
+            <input type="text" data-k="image" data-i="${i}" value="${esc(s.image)}" placeholder="画像URL（例：assets/menu/xxx.jpg）">
+            <div style="display:flex;gap:8px;margin-top:8px">
+              <span class="btn sm filebtn">アップロード<input type="file" accept="image/*" data-up="${i}"></span>
+              ${s.image?`<button class="btn sm" data-act="clrimg" data-i="${i}">画像をクリア</button>`:''}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>`).join("");
+}
+function renderPreview(){
+  const p=document.getElementById('preview');
+  const m=data.month?`<div class="pv-month">${esc(data.month)} の一皿</div>`:"";
+  const cards=(data.stores||[]).map(s=>`
+    <div class="pv-card">
+      <div class="pv-photo" style="${s.image?`background-image:url('${esc(s.image)}')`:''}">${s.image?'':'準備中'}</div>
+      <div class="pv-body"><div class="pv-store">${esc(s.store)}</div>
+        <div class="pv-dish">${esc(s.dish)||'準備中'}</div>
+        ${s.description?`<div class="pv-desc">${esc(s.description)}</div>`:''}</div>
+    </div>`).join("");
+  p.innerHTML=m+(data.note?`<p style="font-size:.82rem;color:var(--cream-dim);margin-bottom:14px">${esc(data.note)}</p>`:"")+cards;
+}
+
+// input handling (event delegation)
+document.getElementById('f-month').addEventListener('input',e=>{data.month=e.target.value;renderPreview()});
+document.getElementById('f-note').addEventListener('input',e=>{data.note=e.target.value;renderPreview()});
+document.getElementById('stores').addEventListener('input',e=>{
+  const k=e.target.dataset.k, i=e.target.dataset.i;
+  if(k!=null&&i!=null){data.stores[i][k]=e.target.value;
+    if(k==='image'){renderStores()}renderPreview()}
+});
+document.getElementById('stores').addEventListener('click',e=>{
+  const act=e.target.dataset.act, i=e.target.dataset.i;
+  if(act==='del'){if(confirm("この店舗を削除しますか？")){data.stores.splice(i,1);renderStores();renderPreview()}}
+  if(act==='clrimg'){data.stores[i].image="";renderStores();renderPreview()}
+});
+document.getElementById('stores').addEventListener('change',e=>{
+  const i=e.target.dataset.up;
+  if(i!=null&&e.target.files&&e.target.files[0]){
+    const file=e.target.files[0];
+    if(file.size>1.5*1024*1024){if(!confirm("画像が大きめです（"+Math.round(file.size/1024)+"KB）。埋め込むとJSONが重くなります。続けますか？\n※本番では画像URL（assets/）の利用を推奨します。")){return}}
+    const fr=new FileReader();fr.onload=()=>{data.stores[i].image=fr.result;renderStores();renderPreview();setStatus("画像を読み込みました")};fr.readAsDataURL(file);
+  }
+});
+document.getElementById('btnAdd').addEventListener('click',()=>{
+  data.stores.push({id:"store-"+(data.stores.length+1),store:"",dish:"",description:"",image:""});
+  renderStores();renderPreview();
+});
+
+// normalize ids before output
+function finalized(){
+  const out=JSON.parse(JSON.stringify(data));
+  (out.stores||[]).forEach((s,i)=>{if(!s.id)s.id=slugify(s.store)+"-"+i});
+  return out;
+}
+document.getElementById('btnDraft').addEventListener('click',()=>{
+  localStorage.setItem(LS_KEY,JSON.stringify(finalized()));setStatus("下書きを保存しました（この端末）");
+});
+function jsonText(){return JSON.stringify(finalized(),null,2)+"\n"}
+document.getElementById('btnExport').addEventListener('click',()=>{
+  document.getElementById('dlg-json').value=jsonText();document.getElementById('dlg').showModal();
+});
+document.getElementById('btnCopy').addEventListener('click',async()=>{
+  try{await navigator.clipboard.writeText(jsonText());setStatus("JSONをコピーしました")}catch(e){setStatus("コピーできませんでした")}
+});
+document.getElementById('btnReload').addEventListener('click',reloadFromFile);
+// dialog actions
+document.getElementById('dlg-close').addEventListener('click',()=>document.getElementById('dlg').close());
+document.getElementById('dlg-copy').addEventListener('click',async()=>{try{await navigator.clipboard.writeText(document.getElementById('dlg-json').value);setStatus("コピーしました")}catch(e){}});
+document.getElementById('dlg-download').addEventListener('click',()=>{
+  const blob=new Blob([document.getElementById('dlg-json').value],{type:"application/json"});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download="omakase.json";a.click();URL.revokeObjectURL(a.href);
+  setStatus("ダウンロードしました");
+});
+
+load();
+</script>
+</body>
+</html>
