@@ -13,6 +13,7 @@
 | `privacy.html` | プライバシーポリシー |
 | `admin/index.html` | 管理画面（翌月のおまかせ編集ツール） |
 | `data/omakase.json` | おまかせコンテンツ（静的モードの公開データ） |
+| `assets/logo.svg` | ロゴ（ブランドマーク）。全ページで参照 |
 | `assets/site-config.js` | 公開クライアント設定（Firebase 設定をここに入れる） |
 | `assets/omakase.js` | コンテンツ読込モジュール（公開ページ共通） |
 | `firestore.rules` / `storage.rules` | Firebase セキュリティルール |
@@ -78,6 +79,7 @@ python3 -m http.server 8000
 ## 公開前に差し替えるプレースホルダ（`TODO` 検索）
 
 - **公式LINE URL** — `index.html` 末尾の `const LINE_URL="#";`。`site-config.js` に `lineUrl` を入れると `menu.html` のCTAにも反映。
+- **ロゴ** — `assets/logo.svg` は公式ロゴ（100doorsandresorts.jp）を取得できなかったため、同系統で作成した**SVGワードマークの仮版**です。`assets/logo.svg` を公式ロゴファイル（同名で配置）に差し替えると、フッター・各サブページ・ヘッダーへ一括反映されます。ヒーローは読み込みフォントを用いたタイポ・ロックアップ。
 - **QRコード** — フッターCTAの `.qr` はテキスト仮表示。
 - **本番URL / OGP** — `index.html` の canonical / og:url / og:image（1200×630の `ogp.jpg`）。
 - **会費の課金日／解約条件の細目** — `tokushoho.html`（規約と整合のうえ確定）。

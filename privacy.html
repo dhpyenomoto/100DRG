@@ -19,7 +19,8 @@ html{-webkit-text-size-adjust:100%}
 body{background:var(--sumi);color:var(--cream);font-family:var(--sans-ja);font-weight:300;line-height:1.95;letter-spacing:.02em;-webkit-font-smoothing:antialiased}
 body::after{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(120% 80% at 50% -10%,rgba(184,146,74,.10),transparent 55%)}
 .wrap{position:relative;z-index:1;max-width:680px;margin:0 auto;padding:0 26px}
-header.page{padding:74px 0 30px;text-align:center}
+header.page{padding:40px 0 30px;text-align:center}
+.sitelogo{display:block;width:210px;max-width:64%;height:auto;margin:0 auto 22px;opacity:.95}
 .kicker{font-family:var(--serif-en);font-size:.7rem;letter-spacing:.4em;text-transform:uppercase;color:var(--gold)}
 h1{font-family:var(--serif-ja);font-weight:600;font-size:1.5rem;margin-top:14px;letter-spacing:.04em;line-height:1.5}
 .rule{display:flex;align-items:center;gap:12px;margin:26px 0}
@@ -42,6 +43,7 @@ section.art li::before{content:"";position:absolute;left:2px;top:13px;width:5px;
 <body>
 <header class="page">
   <div class="wrap">
+    <a href="index.html" aria-label="トップへ"><img class="sitelogo" src="assets/logo.svg" alt="100 DOORS &amp; RESORT &amp; GASTRONOMY" width="210"></a>
     <p class="kicker">Privacy Policy</p>
     <h1>プライバシーポリシー</h1>
   </div>

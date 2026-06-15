@@ -18,8 +18,9 @@ html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{background:var(--sumi);color:var(--cream);font-family:var(--sans-ja);font-weight:300;line-height:1.9;letter-spacing:.02em;-webkit-font-smoothing:antialiased}
 body::after{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(120% 80% at 50% -10%,rgba(184,146,74,.10),transparent 55%)}
 .wrap{position:relative;z-index:1;max-width:620px;margin:0 auto;padding:0 26px}
-.top{padding:26px 0 6px}
-.crumb{font-family:var(--serif-ja);font-size:.8rem;color:var(--gold-l);text-decoration:none;letter-spacing:.04em}
+.top{padding:24px 0 6px;text-align:center}
+.sitelogo{display:block;width:200px;max-width:62%;height:auto;margin:0 auto 14px;opacity:.95}
+.crumb{display:inline-block;font-family:var(--serif-ja);font-size:.8rem;color:var(--gold-l);text-decoration:none;letter-spacing:.04em}
 .crumb:hover{color:var(--cream)}
 header.page{padding:34px 0 10px;text-align:center}
 .kicker{font-family:var(--serif-en);font-size:.7rem;letter-spacing:.36em;text-transform:uppercase;color:var(--gold)}
@@ -49,7 +50,10 @@ header.page{padding:34px 0 10px;text-align:center}
 </style>
 </head>
 <body>
-<div class="wrap top"><a class="crumb" href="index.html">← 祥瑞 ガストロノミー会員</a></div>
+<div class="wrap top">
+  <a href="index.html" aria-label="トップへ"><img class="sitelogo" src="assets/logo.svg" alt="100 DOORS &amp; RESORT &amp; GASTRONOMY" width="200"></a>
+  <a class="crumb" href="index.html">← 祥瑞 ガストロノミー会員</a>
+</div>
 
 <main class="wrap" id="main">
   <p class="err">読み込み中…</p>
