@@ -37,10 +37,11 @@
   "address": { "@type": "PostalAddress", "postalCode": "530-0001", "addressRegion": "大阪府", "addressLocality": "大阪市北区", "streetAddress": "梅田2-5-25 ハービスプラザ 地下2階", "addressCountry": "JP" },
   "areaServed": "関西圏（大阪・兵庫・和歌山・京都・奈良・滋賀）",
   "department": [
-    { "@type": "Restaurant", "name": "大嵓埜 北新地", "servesCuisine": "懐石・寿司懐石", "address": { "@type": "PostalAddress", "addressLocality": "大阪市北区北新地", "addressRegion": "大阪府", "addressCountry": "JP" } },
-    { "@type": "Restaurant", "name": "大嵓埜 京都上七軒", "servesCuisine": "懐石・寿司懐石", "address": { "@type": "PostalAddress", "addressLocality": "京都市上京区上七軒", "addressRegion": "京都府", "addressCountry": "JP" } },
-    { "@type": "Restaurant", "name": "禅園 心斎橋", "address": { "@type": "PostalAddress", "addressLocality": "大阪市中央区心斎橋", "addressRegion": "大阪府", "addressCountry": "JP" } },
-    { "@type": "Restaurant", "name": "禅園 西梅田", "address": { "@type": "PostalAddress", "addressLocality": "大阪市北区梅田", "addressRegion": "大阪府", "addressCountry": "JP" } }
+    { "@type": "Restaurant", "name": "大嵓埜 北新地", "servesCuisine": "懐石料理", "address": { "@type": "PostalAddress", "addressLocality": "大阪市北区北新地", "addressRegion": "大阪府", "addressCountry": "JP" } },
+    { "@type": "Restaurant", "name": "大嵓埜 上七軒", "servesCuisine": "寿司懐石", "address": { "@type": "PostalAddress", "addressLocality": "京都市上京区上七軒", "addressRegion": "京都府", "addressCountry": "JP" } },
+    { "@type": "Restaurant", "name": "禅園 心斎橋", "servesCuisine": "懐石・割烹", "address": { "@type": "PostalAddress", "addressLocality": "大阪市中央区心斎橋", "addressRegion": "大阪府", "addressCountry": "JP" } },
+    { "@type": "Restaurant", "name": "禅園 西梅田", "servesCuisine": "懐石・割烹", "address": { "@type": "PostalAddress", "addressLocality": "大阪市北区梅田", "addressRegion": "大阪府", "addressCountry": "JP" } },
+    { "@type": "Restaurant", "name": "L'Artisan Kanoya", "servesCuisine": "フレンチ" }
   ]
 }
 </script>
@@ -178,18 +179,27 @@ section{position:relative;z-index:1}
 .card .meta{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
 .tag{font-family:var(--serif-ja);font-size:.74rem;color:var(--gold-l);border:1px solid var(--gold-d);padding:5px 12px;letter-spacing:.04em}
 
-/* 今月のおまかせ */
+/* 翌月のおまかせ 先行案内 */
 .om-month{display:inline-block;margin-top:8px;font-family:var(--serif-en);font-size:.74rem;letter-spacing:.18em;color:var(--gold-l);border:1px solid var(--gold-d);padding:5px 14px}
-.omakase-grid{display:flex;flex-direction:column;gap:20px;margin-top:26px}
-.om-card{border:1px solid rgba(184,146,74,.28);background:linear-gradient(180deg,var(--sumi-2),var(--sumi));overflow:hidden}
+.om-loading{font-size:.82rem;color:var(--cream-dim);padding:18px 0}
+.omakase-grid{display:flex;flex-direction:column;gap:18px;margin-top:26px}
+.om-card{display:flex;flex-direction:column;border:1px solid rgba(184,146,74,.28);background:linear-gradient(180deg,var(--sumi-2),var(--sumi));overflow:hidden;text-decoration:none;color:inherit;transition:.35s;position:relative}
+.om-card::before{content:"";position:absolute;top:0;left:0;width:100%;height:2px;background:linear-gradient(90deg,var(--gold-d),var(--gold-l),transparent);opacity:0;transition:.35s}
+.om-card:hover{border-color:var(--gold);transform:translateY(-2px)}
+.om-card:hover::before{opacity:1}
+.om-card.flagship{border-color:rgba(184,146,74,.45)}
 .om-photo{aspect-ratio:4/3;background:#0f0d09 center/cover no-repeat;position:relative;border-bottom:1px solid rgba(184,146,74,.2)}
 .om-photo.empty{display:flex;align-items:center;justify-content:center}
 .om-photo.empty::after{content:"準備中";font-family:var(--serif-ja);font-size:.8rem;color:var(--cream-dim);letter-spacing:.2em}
-.om-body{padding:20px 22px 24px}
-.om-store{font-family:var(--serif-en);font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
-.om-dish{font-family:var(--serif-ja);font-weight:600;font-size:1.16rem;color:var(--cream);margin-top:8px;letter-spacing:.04em;line-height:1.5}
-.om-desc{font-size:.84rem;color:var(--cream-dim);margin-top:12px;line-height:1.95}
-@media(min-width:600px){.omakase-grid{flex-direction:row}.om-card{flex:1;display:flex;flex-direction:column}.om-body{flex:1}}
+.om-body{padding:18px 20px 20px;flex:1;display:flex;flex-direction:column}
+.om-head{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.om-brand{font-family:var(--serif-ja);font-weight:700;font-size:1.04rem;color:var(--cream);letter-spacing:.04em}
+.om-store{font-family:var(--serif-en);font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+.om-genre{font-family:var(--serif-ja);font-size:.68rem;color:var(--gold-l);border:1px solid var(--gold-d);padding:3px 9px;margin-top:10px;align-self:flex-start;letter-spacing:.04em}
+.om-dish{font-family:var(--serif-ja);font-weight:600;font-size:1.1rem;color:var(--cream);margin-top:12px;letter-spacing:.04em;line-height:1.5}
+.om-desc{font-size:.82rem;color:var(--cream-dim);margin-top:10px;line-height:1.9;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.om-more{margin-top:14px;font-family:var(--serif-ja);font-size:.8rem;color:var(--gold-l);letter-spacing:.04em}
+@media(min-width:600px){.omakase-grid{flex-direction:row}.om-card{flex:1}}
 
 /* plan / fee */
 .plan{border:1px solid var(--gold-d);background:var(--sumi-2);padding:34px 26px;margin-top:26px;text-align:center;position:relative}
@@ -286,7 +296,7 @@ footer .legal .sep{color:var(--gold-d);margin:0 8px}
     <div class="amp">&amp; RESORT &amp; GASTRONOMY</div>
   </div>
   <h1 class="hl reveal d2">百の扉、その先へ。</h1>
-  <p class="sub reveal d2">祥瑞が手がける食の頂を、ひとつの会員で。<br>特別な日とビジネスを「大嵓埜」で、<br>家族の食卓を「禅園」で。<br>料理長おまかせの一皿が、いつでも、あなたの席に。</p>
+  <p class="sub reveal d2">祥瑞が手がける食の頂を、ひとつの会員で。<br>特別な日とビジネスを「大嵓埜」で、<br>家族の食卓を「禅園」で。<br>記念日をフレンチ「L'Artisan Kanoya」で。<br>料理長・シェフおまかせの一皿が、いつでも、あなたの席に。</p>
   <div class="badge reveal d3"><span class="pulse"></span>創業会員 ── 先着 100 名 募集</div>
   <div class="cta-grp reveal d3">
     <a class="btn btn-line" href="#join">LINEで登録して入会する</a>
@@ -309,36 +319,45 @@ footer .legal .sep{color:var(--gold-d);margin:0 8px}
 <!-- BRAND USE -->
 <section class="block-tight">
   <div class="wrap">
-    <span class="sec-no reveal">02 — Two Doors</span>
-    <h2 class="sec-title reveal">二つの使い分け</h2>
-    <p class="sec-lead reveal">同じ会員で、シーンに応じて店を選べます。料理長おまかせだからこそ叶う、安定した品質と価値。</p>
+    <span class="sec-no reveal">02 — The Doors</span>
+    <h2 class="sec-title reveal">ブランドの使い分け</h2>
+    <p class="sec-lead reveal">ひとつの会員で、シーンに応じて店を選べます。料理長・シェフおまかせだからこそ叶う、安定した品質と価値。</p>
     <div class="cards">
       <div class="card reveal d1">
         <div class="role">Flagship</div>
         <div class="name">大嵓埜</div>
-        <div class="stores">北新地 ／ 京都上七軒</div>
-        <p class="scene">特別な日に、そして大切なビジネスの席に。おまかせの懐石・寿司懐石で、記憶に残る時間を。</p>
+        <div class="stores">北新地〈懐石〉 ／ 上七軒〈寿司懐石〉</div>
+        <p class="scene">特別な日に、そして大切なビジネスの席に。北新地は懐石、上七軒は寿司懐石。店ごとのおまかせで、記憶に残る時間を。</p>
         <div class="meta"><span class="tag">特別な日</span><span class="tag">接待・会食</span></div>
       </div>
       <div class="card reveal d2">
         <div class="role">Daily &amp; Family</div>
         <div class="name">禅園</div>
         <div class="stores">心斎橋 ／ 西梅田</div>
-        <p class="scene">ご家族で、気軽に。記念日にも。お得感のある会員価格で、上質な食卓を日常に。</p>
+        <p class="scene">ご家族で、気軽に。記念日にも。お得感のある会員価格で、上質な食卓を日常に。両店共通のおまかせ。</p>
         <div class="meta"><span class="tag">家族</span><span class="tag">記念日</span></div>
+      </div>
+      <div class="card reveal d3">
+        <div class="role">French</div>
+        <div class="name" style="font-size:1.12rem">L'Artisan Kanoya</div>
+        <div class="stores">フレンチ</div>
+        <p class="scene">記念日やデートに。ガストロノミーの愉しみを、シェフおまかせのフレンチコースで。</p>
+        <div class="meta"><span class="tag">フレンチ</span><span class="tag">記念日</span></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- 今月のおまかせ -->
+<!-- 翌月のおまかせ 先行案内 -->
 <section class="block-tight" id="omakase">
   <div class="wrap">
-    <span class="sec-no reveal">— This Month</span>
-    <h2 class="sec-title reveal">今月のおまかせ</h2>
-    <p class="sec-lead reveal" id="omakase-note">季節の一皿を、各店の料理長より。</p>
+    <span class="sec-no reveal">— Next Month</span>
+    <h2 class="sec-title reveal">翌月のおまかせ 先行案内</h2>
+    <p class="sec-lead reveal">季節のおまかせを、どなたよりも先に。店舗ごとに料理長がしつらえる一皿を、それぞれのページでご案内します。</p>
     <div class="om-month reveal" id="omakase-month" hidden></div>
-    <div class="omakase-grid" id="omakase-grid"></div>
+    <div class="omakase-grid" id="omakase-grid">
+      <p class="om-loading">読み込み中…</p>
+    </div>
   </div>
 </section>
 
@@ -456,7 +475,7 @@ footer .legal .sep{color:var(--gold-d);margin:0 8px}
 <footer>
   <div class="mark">100 DOORS &amp; RESORT &amp; GASTRONOMY</div>
   <div class="co">株式会社祥瑞　／　dhp都市開発グループ</div>
-  <div class="meta">北新地 大嵓埜　・　京都上七軒 大嵓埜　・　禅園 心斎橋　・　禅園 西梅田</div>
+  <div class="meta">北新地 大嵓埜　・　上七軒 大嵓埜　・　禅園 心斎橋　・　禅園 西梅田　・　L'Artisan Kanoya</div>
   <div class="area">関西圏 限定 募集</div>
   <nav class="legal">
     <a href="tokushoho.html">特定商取引法に基づく表記</a>
@@ -473,6 +492,7 @@ footer .legal .sep{color:var(--gold-d);margin:0 8px}
   </div>
 </div>
 
+<script src="assets/site-config.js"></script>
 <script>
 // scroll reveal
 const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.16,rootMargin:'0px 0px -8% 0px'});
@@ -482,37 +502,34 @@ window.addEventListener('load',()=>{document.querySelectorAll('.hero .reveal').f
 // LINE placeholder (replace href with real LINE add-friend URL)
 const LINE_URL="#"; // ←ここに公式LINEの友だち追加URLを設定
 document.querySelectorAll('[data-line]').forEach(a=>{if(LINE_URL!=="#")a.href=LINE_URL});
+</script>
 
-// ===== 今月のおまかせ：data/omakase.json を読み込んで描画 =====
-// 管理画面(admin/)で編集 → JSONを差し替えると、ここに反映される。
-const OMAKASE_FALLBACK={month:"",note:"季節の一皿を、各店の料理長より。",stores:[
-  {store:"大嵓埜 北新地",dish:"",description:"",image:""},
-  {store:"禅園",dish:"",description:"",image:""},
-  {store:"上七軒 大嵓埜",dish:"",description:"",image:""}
-]};
-function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
-function renderOmakase(data){
-  const grid=document.getElementById('omakase-grid');if(!grid)return;
-  const note=document.getElementById('omakase-note');
-  const mo=document.getElementById('omakase-month');
-  if(note&&data.note)note.textContent=data.note;
-  if(mo&&data.month){mo.textContent=data.month+" の一皿";mo.hidden=false}
-  grid.innerHTML=(data.stores||[]).map(s=>{
-    const hasImg=s.image&&s.image.trim()!=="";
-    const photo=hasImg
-      ? `<div class="om-photo" style="background-image:url('${esc(s.image)}')"></div>`
-      : `<div class="om-photo empty"></div>`;
-    return `<article class="om-card">${photo}<div class="om-body">`
-      +`<div class="om-store">${esc(s.store)}</div>`
-      +`<h3 class="om-dish">${esc(s.dish)||"準備中"}</h3>`
-      +(s.description?`<p class="om-desc">${esc(s.description)}</p>`:"")
-      +`</div></article>`;
-  }).join("");
+<!-- 翌月のおまかせ：店舗ごとのページへ誘導するカードを描画 -->
+<script type="module">
+import { loadOmakase, esc } from './assets/omakase.js';
+const grid = document.getElementById('omakase-grid');
+const mo = document.getElementById('omakase-month');
+function card(s){
+  const flagship = s.brand === '大嵓埜' ? ' flagship' : '';
+  const photo = (s.image && s.image.trim())
+    ? `<div class="om-photo" style="background-image:url('${esc(s.image)}')"></div>`
+    : `<div class="om-photo empty"></div>`;
+  return `<a class="om-card${flagship}" href="menu.html?id=${encodeURIComponent(s.id)}">`
+    + photo
+    + `<div class="om-body">`
+    +   `<div class="om-head"><span class="om-brand">${esc(s.brand)||esc(s.store)}</span><span class="om-store">${esc(s.store)}</span></div>`
+    +   (s.genre ? `<span class="om-genre">${esc(s.genre)}</span>` : '')
+    +   `<h3 class="om-dish">${esc(s.dish)||'準備中'}</h3>`
+    +   (s.description ? `<p class="om-desc">${esc(s.description)}</p>` : '')
+    +   `<span class="om-more">翌月の一皿を見る →</span>`
+    + `</div></a>`;
 }
-fetch('data/omakase.json',{cache:'no-store'})
-  .then(r=>{if(!r.ok)throw 0;return r.json()})
-  .then(renderOmakase)
-  .catch(()=>renderOmakase(OMAKASE_FALLBACK));
+loadOmakase().then(data=>{
+  // 大嵓埜ブランドを先頭に
+  const stores = (data.stores||[]).slice().sort((a,b)=>(a.brand==='大嵓埜'?0:1)-(b.brand==='大嵓埜'?0:1));
+  if(mo && data.updated){ mo.textContent = '更新：' + data.updated; mo.hidden = false; }
+  grid.innerHTML = stores.map(card).join('') || '<p class="om-loading">準備中です。</p>';
+}).catch(()=>{ grid.innerHTML = '<p class="om-loading">ただいま読み込めませんでした。</p>'; });
 </script>
 </body>
 </html>

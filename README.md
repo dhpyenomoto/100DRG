@@ -1,68 +1,94 @@
 # 100 DOORS &amp; RESORT &amp; GASTRONOMY — 祥瑞 ガストロノミー会員 LP
 
 株式会社祥瑞（dhp都市開発グループ）による月額制ガストロノミー会員のランディングページ。
-モバイルファーストの静的サイト（ビルド不要）。
+静的サイト（ビルド不要）。任意で Firebase 連携によりログイン編集・即時公開へ拡張可能。
 
 ## 構成
 
-| ファイル | 内容 |
+| パス | 内容 |
 |---|---|
-| `index.html` | 会員サイト本体（ヒーロー／コンセプト／二店舗の使い分け／**今月のおまかせ**／会員プラン／接待・法人／特典／リゾート／入会ステップ／FAQ／CTA） |
+| `index.html` | 会員サイト本体（ヒーロー／コンセプト／ブランドの使い分け／翌月のおまかせ先行案内／会員プラン／接待・法人／特典／リゾート／入会ステップ／FAQ／CTA） |
+| `menu.html` | 店舗ごとの「翌月のおまかせ」告知ページ（`?id=` で切替） |
 | `tokushoho.html` | 特定商取引法に基づく表記 |
 | `privacy.html` | プライバシーポリシー |
-| `admin/index.html` | 管理画面（今月のおまかせ編集ツール） |
-| `data/omakase.json` | 各店舗の「今月のおまかせ」コンテンツ（公開データ） |
+| `admin/index.html` | 管理画面（翌月のおまかせ編集ツール） |
+| `data/omakase.json` | おまかせコンテンツ（静的モードの公開データ） |
+| `assets/site-config.js` | 公開クライアント設定（Firebase 設定をここに入れる） |
+| `assets/omakase.js` | コンテンツ読込モジュール（公開ページ共通） |
+| `firestore.rules` / `storage.rules` | Firebase セキュリティルール |
+| `.github/workflows/deploy.yml` | GitHub Pages 自動デプロイ |
 
-ページはCSS・JSインラインで完結（フォントはGoogle Fonts）。
+## 店舗ラインナップ
 
-## 今月のおまかせ（管理画面）
+| ブランド | 店舗 | ジャンル | おまかせ告知 |
+|---|---|---|---|
+| 大嵓埜（旗艦・主力） | 北新地 | 懐石料理 | `menu.html?id=daikouya-kitashinchi` |
+| 大嵓埜（旗艦・主力） | 上七軒 | 寿司懐石 | `menu.html?id=daikouya-kamishichiken` |
+| 禅園 | 心斎橋・西梅田（両店共通） | 懐石・割烹 | `menu.html?id=zenen` |
+| L'Artisan Kanoya | （要確認） | フレンチ | `menu.html?id=lartisan-kanoya` |
 
-各店舗（北新地 大嵓埜・禅園・上七軒 大嵓埜）の「今月のおまかせ」を、料理写真＋概要付きで掲載。
-公開サイトは `data/omakase.json` を読み込んで描画します。
+> ⚠ **要確認**：大嵓埜の懐石／寿司懐石の北新地・上七軒の対応は仮置きです（管理画面で入替可）。
+> L'Artisan Kanoya は外部サイトに接続できず、店舗名の読み・所在地・料理内容は仮置きです。正しい情報をいただければ更新します。
 
-- **編集**：`admin/index.html` をブラウザで開く → 月・リード文・各店の料理名／概要／写真を編集 → ライブプレビュー。
-- **下書き保存**：ブラウザ（localStorage）に保存。続きから編集できます。
-- **公開**：「公開用JSONを書き出す」→ `data/omakase.json` を差し替えてデプロイ＝公開。
-- 画像は URL 指定（`assets/menu/…` 推奨）またはアップロード（data URL 埋め込み）。
+## 会員プラン
 
-> 静的サイトのため、現状の「公開」はJSON差し替え。サーバー連携（Git-based CMS / Firebase 等）でワンクリック公開・ログイン認証・画像アップロードに拡張可能。`admin/` は `noindex`。
+¥50,000／月（税抜・税込¥55,000）。毎月4ポイント付与（1pt=¥12,500相当／大嵓埜2pt・禅園1pt）。
+お支払いはクレジットカード登録・自動継続課金（翌月分を前月末に課金）。解約は2ヶ月以上前の申し出。
 
-## ブランド設定
+## 翌月のおまかせ / 管理画面
 
-| 項目 | 値 |
-|---|---|
-| 旗艦店 | 大嵓埜（北新地 ／ 京都上七軒） |
-| 日常・家族 | 禅園（心斎橋 ／ 西梅田） |
-| 会費 | ¥50,000／月（税抜）・毎月4ポイント付与 |
-| ポイント | 1pt = ¥12,500 相当（大嵓埜 2pt／回、禅園 1pt／回） |
-| 募集 | 創業会員 先着100名・関西圏限定 |
+各店舗の「翌月のおまかせ」を、料理写真＋概要付きで `menu.html` に掲載。トップページはその先行案内（大嵓埜を前面）。
 
-配色（CSS変数）は墨色 `#14110C` ＋ 金 `#B8924A` 基調、LINE緑 `#06C755`。
+`admin/index.html` をブラウザで開くと編集できます。動作は2モード：
 
-## 公開前に差し替えるプレースホルダ
+### 静的モード（既定・Firebase未設定）
+- 各エントリーの ブランド／店舗／ジャンル／対象月／料理名／概要／写真 を編集、ライブプレビュー。
+- **下書き保存**＝ブラウザ（localStorage）。
+- **公開**＝「公開用JSONを書き出す」→ `data/omakase.json` を差し替えてデプロイ。
+- 画像は URL 指定、またはアップロード（data URL 埋め込み）。
 
-`TODO` で検索すると未確定箇所が見つかります。
+### Firebase モード（`assets/site-config.js` に設定を入れると有効）
+- 管理者ログイン（メール／パスワード）→ 編集 → **「公開」で即時反映**。
+- 画像アップロードは Cloud Storage に保存しURLを自動設定。
+- 公開ページは Firestore `content/omakase` を読み、未設定/失敗時は `data/omakase.json` にフォールバック。
 
-- **公式LINE URL** — `index.html` 末尾の `const LINE_URL="#";` を友だち追加URLに変更すると、全LINEボタンに自動反映。
-- **QRコード** — フッターCTAの `.qr` はテキスト「QR」の仮表示。実際のLINE友だち追加QR画像に差し替え。
-- **本番URL / OGP** — `<link rel="canonical">`・`og:url`・`og:image`（1200×630のOGP画像 `ogp.jpg`）。
-- **会費の課金日 / 解約条件** — `tokushoho.html` の支払時期・解約退会・返金の各欄。会員規約と整合させて確定。
+#### Firebase セットアップ手順
+1. [Firebase コンソール](https://console.firebase.google.com/) でプロジェクト作成。
+2. **Authentication** を有効化 → メール/パスワード を ON → 管理者ユーザーを追加。
+3. **Firestore Database** を作成 → ルールに `firestore.rules` を反映。
+4. **Storage** を作成 → ルールに `storage.rules` を反映。
+5. プロジェクト設定 → ウェブアプリを追加し、構成値を `assets/site-config.js` の `firebase` に貼付。
+6. （任意）`content/omakase` ドキュメントが無い場合、管理画面で「公開」すると作成されます。
 
-### 反映済みの会社情報（shonzui-inc.com より）
+> Firebase の構成値（apiKey等）は公開クライアントキーで、フロントに置いて問題ありません。アクセス制御は認証＋ルールで担保します。
 
-事業者名 株式会社祥瑞／運営統括責任者 榎本泰之（代表取締役）／
-〒530-0001 大阪府大阪市北区梅田2丁目5番25号 ハービスプラザ 地下2階／
-TEL 06-6457-1002（平日10:00–18:00）／設立 2005年10月1日／資本金 6,000万円。
-`tokushoho.html`・`privacy.html`・`index.html` の構造化データに反映済み。
+## 公開（GitHub Pages）
 
-## プレビュー
+`.github/workflows/deploy.yml` で自動デプロイします。リポジトリの
+**Settings → Pages → Build and deployment → Source = GitHub Actions** を選択してください。
+`claude/gastronomy-membership-site-mmpk3x` または `main` への push で公開されます。
+
+## ローカルプレビュー
 
 ```sh
 python3 -m http.server 8000
-# http://localhost:8000/ を開く
+# http://localhost:8000/ を開く（fetchを使うため file:// ではなくサーバー経由で）
 ```
 
-## 注意
+## 公開前に差し替えるプレースホルダ（`TODO` 検索）
 
-- 会費・ポイント・特典等の表記は規約と一致させること。`tokushoho.html` の総額表示（税込）は公開時に確定。
-- `tokushoho.html` / `privacy.html` は `noindex` 指定済み。
+- **公式LINE URL** — `index.html` 末尾の `const LINE_URL="#";`。`site-config.js` に `lineUrl` を入れると `menu.html` のCTAにも反映。
+- **QRコード** — フッターCTAの `.qr` はテキスト仮表示。
+- **本番URL / OGP** — `index.html` の canonical / og:url / og:image（1200×630の `ogp.jpg`）。
+- **会費の課金日／解約条件の細目** — `tokushoho.html`（規約と整合のうえ確定）。
+- **L'Artisan Kanoya / 大嵓埜ジャンル対応** — 上記「要確認」を参照。
+
+### 反映済みの会社情報（shonzui-inc.com より）
+
+株式会社祥瑞／運営統括責任者 榎本泰之（代表取締役）／
+〒530-0001 大阪府大阪市北区梅田2丁目5番25号 ハービスプラザ 地下2階／
+TEL 06-6457-1002（平日10:00–18:00）／設立 2005年10月1日／資本金 6,000万円。
+
+## 注意
+- `admin/` `tokushoho.html` `privacy.html` `menu.html` は検索除外（noindex）設定。
+- `tokushoho.html` の税込表示は税率10%で算定。
