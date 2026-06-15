@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>祥瑞 ガストロノミー会員 ｜ 100 DOORS &amp; RESORT &amp; GASTRONOMY</title>
+<meta name="description" content="百の扉、その先へ。祥瑞の月額ガストロノミー会員。北新地・京都上七軒『大嵓埜』、禅園。特別な日とビジネス、家族の食卓を、ひとつの会員で。創業会員 先着100名。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Shippori+Mincho+B1:wght@400;500;600;700&family=Zen+Kaku+Gothic+New:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --sumi:#14110C;
+  --sumi-2:#1C1813;
+  --sumi-3:#241F18;
+  --gold:#B8924A;
+  --gold-l:#D9BC84;
+  --gold-d:#8C6E36;
+  --cream:#ECE4D4;
+  --cream-dim:#A2967F;
+  --line:#06C755;
+  --serif-ja:"Shippori Mincho B1",serif;
+  --serif-en:"Cormorant Garamond",serif;
+  --sans-ja:"Zen Kaku Gothic New",sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  background:var(--sumi);
+  color:var(--cream);
+  font-family:var(--sans-ja);
+  font-weight:300;
+  line-height:1.9;
+  letter-spacing:.02em;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+/* grain + ambient */
+body::before{
+  content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.05;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+body::after{
+  content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(120% 80% at 50% -10%, rgba(184,146,74,.10), transparent 55%),
+    radial-gradient(100% 60% at 80% 110%, rgba(184,146,74,.06), transparent 60%);
+}
+.wrap{position:relative;z-index:1;max-width:560px;margin:0 auto;padding:0 26px}
+section{position:relative;z-index:1}
+
+/* type */
+.en{font-family:var(--serif-en);letter-spacing:.06em}
+.ja-serif{font-family:var(--serif-ja)}
+.kicker{
+  font-family:var(--serif-en);font-size:.72rem;letter-spacing:.42em;
+  text-transform:uppercase;color:var(--gold);font-weight:500;
+}
+.sec-no{
+  font-family:var(--serif-en);font-size:.7rem;letter-spacing:.3em;color:var(--gold-d);
+  display:inline-block;margin-bottom:14px;
+}
+.sec-title{font-family:var(--serif-ja);font-weight:600;font-size:1.5rem;line-height:1.5;color:var(--cream);margin-bottom:6px}
+.sec-lead{font-size:.86rem;color:var(--cream-dim);line-height:2;margin-top:14px}
+
+/* gold rule */
+.rule{display:flex;align-items:center;gap:12px;margin:0 auto}
+.rule::before,.rule::after{content:"";height:1px;background:linear-gradient(90deg,transparent,var(--gold-d),transparent);flex:1}
+.rule .dot{width:5px;height:5px;border:1px solid var(--gold);transform:rotate(45deg)}
+
+/* ===== HERO ===== */
+.hero{min-height:100svh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:90px 26px 64px}
+.hero .frame{
+  position:relative;padding:46px 30px;max-width:440px;width:100%;
+  border:1px solid var(--gold-d);
+  box-shadow:inset 0 0 0 5px rgba(20,17,12,1), inset 0 0 0 6px rgba(184,146,74,.35);
+}
+.hero .frame::before,.hero .frame::after{
+  content:"";position:absolute;width:14px;height:14px;border:1px solid var(--gold);
+}
+.hero .frame::before{top:-7px;left:-7px;border-right:none;border-bottom:none}
+.hero .frame::after{bottom:-7px;right:-7px;border-left:none;border-top:none}
+.hero .num{
+  font-family:var(--serif-en);font-weight:500;font-size:clamp(3.6rem,17vw,5.2rem);
+  line-height:.9;color:var(--cream);letter-spacing:.01em;
+}
+.hero .doors{font-family:var(--serif-en);font-size:1.18rem;letter-spacing:.3em;color:var(--gold-l);margin-top:6px}
+.hero .amp{font-family:var(--serif-en);font-size:.74rem;letter-spacing:.34em;color:var(--cream-dim);margin-top:14px}
+.hero .hl{font-family:var(--serif-ja);font-weight:600;font-size:1.55rem;letter-spacing:.08em;margin-top:30px;line-height:1.7}
+.hero .sub{font-size:.84rem;color:var(--cream-dim);margin-top:18px;max-width:380px;line-height:2.1}
+.badge{
+  display:inline-flex;align-items:center;gap:9px;margin-top:30px;padding:9px 18px;
+  border:1px solid var(--gold-d);background:rgba(184,146,74,.06);
+  font-family:var(--serif-ja);font-size:.78rem;letter-spacing:.12em;color:var(--gold-l);
+}
+.badge .pulse{width:7px;height:7px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 0 rgba(184,146,74,.6);animation:pulse 2.4s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(184,146,74,.5)}70%{box-shadow:0 0 0 9px rgba(184,146,74,0)}100%{box-shadow:0 0 0 0 rgba(184,146,74,0)}}
+.scroll-cue{margin-top:46px;font-family:var(--serif-en);font-size:.62rem;letter-spacing:.3em;color:var(--cream-dim);writing-mode:vertical-rl;height:54px;position:relative}
+.scroll-cue::after{content:"";position:absolute;bottom:-18px;left:50%;width:1px;height:14px;background:var(--gold-d)}
+
+/* CTA buttons */
+.btn{display:block;text-align:center;font-family:var(--sans-ja);text-decoration:none;letter-spacing:.08em;transition:.35s;border-radius:2px}
+.btn-line{background:var(--line);color:#fff;font-weight:700;font-size:.96rem;padding:17px;box-shadow:0 8px 30px rgba(6,199,85,.25)}
+.btn-line:hover{filter:brightness(1.06);transform:translateY(-1px)}
+.btn-ghost{border:1px solid var(--gold-d);color:var(--gold-l);font-size:.84rem;padding:15px;margin-top:12px;font-family:var(--serif-ja)}
+.btn-ghost:hover{background:rgba(184,146,74,.08);border-color:var(--gold)}
+.hero .cta-grp{width:100%;max-width:360px;margin-top:34px}
+
+/* generic section spacing */
+.block{padding:70px 0}
+.block-tight{padding:54px 0}
+
+/* concept */
+.concept .big{font-family:var(--serif-ja);font-weight:500;font-size:1.32rem;line-height:2.1;color:var(--cream);letter-spacing:.06em}
+.concept .big b{color:var(--gold-l);font-weight:600}
+
+/* brand cards */
+.cards{display:flex;flex-direction:column;gap:18px;margin-top:30px}
+.card{position:relative;border:1px solid rgba(184,146,74,.28);background:linear-gradient(180deg,var(--sumi-2),var(--sumi));padding:26px 24px;overflow:hidden}
+.card::before{content:"";position:absolute;top:0;left:0;width:100%;height:2px;background:linear-gradient(90deg,var(--gold-d),var(--gold-l),transparent)}
+.card .role{font-family:var(--serif-en);font-size:.66rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold)}
+.card .name{font-family:var(--serif-ja);font-weight:700;font-size:1.34rem;margin-top:8px;letter-spacing:.06em}
+.card .stores{font-size:.78rem;color:var(--cream-dim);margin-top:4px}
+.card .scene{font-size:.86rem;color:var(--cream);margin-top:16px;line-height:1.9}
+.card .meta{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
+.tag{font-family:var(--serif-ja);font-size:.74rem;color:var(--gold-l);border:1px solid var(--gold-d);padding:5px 12px;letter-spacing:.04em}
+
+/* plan / fee */
+.plan{border:1px solid var(--gold-d);background:var(--sumi-2);padding:34px 26px;margin-top:26px;text-align:center;position:relative}
+.plan .label{font-family:var(--serif-en);letter-spacing:.28em;font-size:.66rem;text-transform:uppercase;color:var(--gold)}
+.plan .price{font-family:var(--serif-en);font-weight:500;font-size:3.4rem;line-height:1;color:var(--cream);margin-top:14px}
+.plan .price .yen{font-size:1.5rem;vertical-align:.5em;margin-right:2px}
+.plan .price .per{font-family:var(--sans-ja);font-size:.9rem;color:var(--cream-dim);letter-spacing:.06em}
+.plan .tax{font-size:.74rem;color:var(--cream-dim);margin-top:6px}
+.plan .pt{display:inline-block;margin-top:18px;font-family:var(--serif-ja);font-size:.84rem;color:var(--gold-l);border-top:1px solid var(--gold-d);border-bottom:1px solid var(--gold-d);padding:8px 0;letter-spacing:.06em}
+.usetbl{margin-top:24px;border-top:1px solid rgba(184,146,74,.22)}
+.usetbl .row{display:flex;justify-content:space-between;align-items:baseline;padding:15px 2px;border-bottom:1px solid rgba(184,146,74,.16);text-align:left;gap:14px}
+.usetbl .row .l{font-family:var(--serif-ja);font-size:.92rem;color:var(--cream)}
+.usetbl .row .l small{display:block;font-family:var(--sans-ja);font-size:.7rem;color:var(--cream-dim);letter-spacing:0;margin-top:2px}
+.usetbl .row .r{font-family:var(--serif-en);font-size:1.04rem;color:var(--gold-l);white-space:nowrap}
+.usetbl .row .r b{font-weight:600}
+
+/* business value */
+.feat{display:flex;flex-direction:column;gap:2px;margin-top:24px}
+.feat .item{display:flex;gap:16px;padding:18px 0;border-bottom:1px solid rgba(184,146,74,.14)}
+.feat .item:last-child{border-bottom:none}
+.feat .ic{flex:0 0 auto;width:34px;height:34px;border:1px solid var(--gold-d);display:flex;align-items:center;justify-content:center;font-family:var(--serif-en);color:var(--gold);font-size:.86rem;transform:rotate(45deg)}
+.feat .ic span{transform:rotate(-45deg)}
+.feat .tx h4{font-family:var(--serif-ja);font-weight:600;font-size:.98rem;color:var(--cream);letter-spacing:.04em}
+.feat .tx p{font-size:.8rem;color:var(--cream-dim);margin-top:5px;line-height:1.9}
+
+/* resort highlight */
+.resort{margin:70px 0;padding:56px 30px;text-align:center;border-top:1px solid var(--gold-d);border-bottom:1px solid var(--gold-d);background:radial-gradient(120% 100% at 50% 0%,rgba(184,146,74,.08),transparent 70%)}
+.resort .en{font-size:.7rem;letter-spacing:.34em;color:var(--gold);text-transform:uppercase}
+.resort h3{font-family:var(--serif-ja);font-weight:600;font-size:1.5rem;margin-top:16px;line-height:1.7;letter-spacing:.06em}
+.resort p{font-size:.84rem;color:var(--cream-dim);margin-top:16px;line-height:2.1;max-width:400px;margin-left:auto;margin-right:auto}
+
+/* steps */
+.steps{counter-reset:s;margin-top:28px}
+.step{display:flex;gap:18px;padding:20px 0;border-bottom:1px solid rgba(184,146,74,.14);align-items:flex-start}
+.step::before{counter-increment:s;content:"0" counter(s);font-family:var(--serif-en);font-size:1.3rem;color:var(--gold);flex:0 0 auto;line-height:1.3}
+.step h4{font-family:var(--serif-ja);font-weight:600;font-size:1rem;color:var(--cream)}
+.step p{font-size:.8rem;color:var(--cream-dim);margin-top:5px;line-height:1.9}
+
+/* faq */
+.faq{margin-top:24px}
+.faq details{border-bottom:1px solid rgba(184,146,74,.18)}
+.faq summary{list-style:none;cursor:pointer;padding:18px 2px;display:flex;justify-content:space-between;align-items:center;gap:14px;font-family:var(--serif-ja);font-size:.94rem;color:var(--cream)}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary .q{font-family:var(--serif-en);color:var(--gold);margin-right:8px;font-size:.9rem}
+.faq summary .plus{flex:0 0 auto;color:var(--gold);font-family:var(--serif-en);font-size:1.2rem;transition:.3s}
+.faq details[open] summary .plus{transform:rotate(45deg)}
+.faq .a{padding:0 2px 20px;font-size:.82rem;color:var(--cream-dim);line-height:2}
+
+/* footer cta */
+.foot-cta{margin:64px 0 0;padding:54px 30px 40px;border:1px solid var(--gold-d);text-align:center;background:var(--sumi-2)}
+.foot-cta h3{font-family:var(--serif-ja);font-weight:600;font-size:1.32rem;letter-spacing:.06em;line-height:1.7}
+.foot-cta p{font-size:.82rem;color:var(--cream-dim);margin-top:14px;line-height:2}
+.qr{width:120px;height:120px;margin:26px auto 0;border:1px solid var(--gold-d);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:6px;background:var(--sumi)}
+.qr .q{font-family:var(--serif-en);font-size:1.6rem;color:var(--gold);letter-spacing:.1em}
+.qr small{font-size:.62rem;color:var(--cream-dim);letter-spacing:.1em}
+.foot-cta .cta-grp{max-width:340px;margin:28px auto 0}
+
+footer{padding:48px 26px 130px;text-align:center}
+footer .mark{font-family:var(--serif-en);letter-spacing:.24em;font-size:.78rem;color:var(--gold-l)}
+footer .co{font-family:var(--serif-ja);font-size:.82rem;color:var(--cream);margin-top:14px;letter-spacing:.06em}
+footer .meta{font-size:.7rem;color:var(--cream-dim);margin-top:10px;line-height:1.9}
+footer .area{display:inline-block;margin-top:16px;font-size:.7rem;color:var(--gold-l);border:1px solid var(--gold-d);padding:6px 14px;letter-spacing:.1em}
+
+/* sticky bottom bar */
+.sticky{position:fixed;left:0;right:0;bottom:0;z-index:50;padding:12px 16px calc(12px + env(safe-area-inset-bottom));background:linear-gradient(180deg,rgba(20,17,12,0),rgba(20,17,12,.95) 30%);backdrop-filter:blur(4px)}
+.sticky .inner{max-width:560px;margin:0 auto;display:flex;gap:10px}
+.sticky .btn-line{flex:1;padding:15px;font-size:.92rem;margin:0}
+.sticky .btn-mini{flex:0 0 auto;display:flex;align-items:center;justify-content:center;padding:0 18px;border:1px solid var(--gold-d);color:var(--gold-l);text-decoration:none;font-family:var(--serif-ja);font-size:.8rem;border-radius:2px}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity 1s cubic-bezier(.16,1,.3,1),transform 1s cubic-bezier(.16,1,.3,1)}
+.reveal.in{opacity:1;transform:none}
+.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}.d4{transition-delay:.32s}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
+
+@media(min-width:600px){
+  .cards{flex-direction:row}
+  .card{flex:1}
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <p class="kicker reveal">Gastronomy Membership</p>
+  <div class="frame reveal d1" style="margin-top:24px">
+    <div class="num">100</div>
+    <div class="doors">DOORS</div>
+    <div class="amp">&amp; RESORT &amp; GASTRONOMY</div>
+  </div>
+  <h1 class="hl reveal d2">百の扉、その先へ。</h1>
+  <p class="sub reveal d2">祥瑞が手がける食の頂を、ひとつの会員で。<br>特別な日とビジネスを「大嵓埜」で、<br>家族の食卓を「禅園」で。<br>料理長おまかせの一皿が、いつでも、あなたの席に。</p>
+  <div class="badge reveal d3"><span class="pulse"></span>創業会員 ── 先着 100 名 募集</div>
+  <div class="cta-grp reveal d3">
+    <a class="btn btn-line" href="#join">LINEで登録して入会する</a>
+    <a class="btn btn-ghost" href="#corporate">接待・法人でのご利用を相談する</a>
+  </div>
+  <div class="scroll-cue reveal d4">SCROLL</div>
+</section>
+
+<!-- CONCEPT -->
+<section class="block concept">
+  <div class="wrap">
+    <div class="rule reveal"><span class="dot"></span></div>
+    <div style="text-align:center;margin-top:34px" class="reveal d1">
+      <span class="sec-no">01 — Concept</span>
+      <p class="big">食は、<b>扉</b>である。<br>その一皿の向こうに、<br>人をもてなす時間があり、<br>家族の記憶があり、<br>そして、旅がある。<br><br>祥瑞の会員制は、<br><b>百の扉</b>を、あなたのために開く。</p>
+    </div>
+  </div>
+</section>
+
+<!-- BRAND USE -->
+<section class="block-tight">
+  <div class="wrap">
+    <span class="sec-no reveal">02 — Two Doors</span>
+    <h2 class="sec-title reveal">二つの使い分け</h2>
+    <p class="sec-lead reveal">同じ会員で、シーンに応じて店を選べます。料理長おまかせだからこそ叶う、安定した品質と価値。</p>
+    <div class="cards">
+      <div class="card reveal d1">
+        <div class="role">Flagship</div>
+        <div class="name">大嵓埜</div>
+        <div class="stores">北新地 ／ 京都上七軒</div>
+        <p class="scene">特別な日に、そして大切なビジネスの席に。おまかせの懐石・寿司懐石で、記憶に残る時間を。</p>
+        <div class="meta"><span class="tag">特別な日</span><span class="tag">接待・会食</span></div>
+      </div>
+      <div class="card reveal d2">
+        <div class="role">Daily &amp; Family</div>
+        <div class="name">禅園</div>
+        <div class="stores">心斎橋 ／ 西梅田</div>
+        <p class="scene">ご家族で、気軽に。記念日にも。お得感のある会員価格で、上質な食卓を日常に。</p>
+        <div class="meta"><span class="tag">家族</span><span class="tag">記念日</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PLAN -->
+<section class="block">
+  <div class="wrap">
+    <span class="sec-no reveal">03 — Membership</span>
+    <h2 class="sec-title reveal">会員プラン</h2>
+    <p class="sec-lead reveal">月額会費で4ポイントを付与。ポイントを使って、おまかせコースをご利用いただけます。</p>
+    <div class="plan reveal d1">
+      <div class="label">Monthly Membership</div>
+      <div class="price"><span class="yen">¥</span>50,000<span class="per"> ／ 月</span></div>
+      <div class="tax">税抜　｜　毎月 4 ポイント付与</div>
+      <div class="pt">1ポイント = ¥12,500 相当</div>
+      <div class="usetbl">
+        <div class="row">
+          <div class="l">大嵓埜 おまかせ<small>北新地 ／ 京都上七軒</small></div>
+          <div class="r"><b>2pt</b> ／ 回 ・ 月<b>2</b>回</div>
+        </div>
+        <div class="row">
+          <div class="l">禅園 おまかせ<small>心斎橋 ／ 西梅田</small></div>
+          <div class="r"><b>1pt</b> ／ 回 ・ 月<b>4</b>回</div>
+        </div>
+        <div class="row">
+          <div class="l">同伴者のご利用<small>別精算（カード／現金）</small></div>
+          <div class="r">会員価格で</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BUSINESS / COMPANION VALUE -->
+<section class="block-tight" id="corporate">
+  <div class="wrap">
+    <span class="sec-no reveal">04 — For Business</span>
+    <h2 class="sec-title reveal">接待・法人での価値</h2>
+    <p class="sec-lead reveal">役員個人での登録はもちろん、法人会員にも対応。接待コストを定額化し、経費管理をシンプルに。</p>
+    <div class="feat">
+      <div class="item reveal d1"><div class="ic"><span>壱</span></div><div class="tx"><h4>同伴者も会員価格</h4><p>お連れ様も会員価格でご案内。お支払いは別精算（カード／現金）なので、用途に応じて柔軟に。</p></div></div>
+      <div class="item reveal d2"><div class="ic"><span>弐</span></div><div class="tx"><h4>接待コストの定額化</h4><p>月額制により、会食予算が見通しやすくなります。法人会員なら請求書・口座振替にも対応。</p></div></div>
+      <div class="item reveal d3"><div class="ic"><span>参</span></div><div class="tx"><h4>個人でも法人でも</h4><p>大企業の役員、中小企業の経営者・役員、個人会員まで。登録形態は柔軟にお選びいただけます。</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRIVILEGES -->
+<section class="block-tight">
+  <div class="wrap">
+    <span class="sec-no reveal">05 — Privileges</span>
+    <h2 class="sec-title reveal">会員特典</h2>
+    <div class="feat">
+      <div class="item reveal d1"><div class="ic"><span>◇</span></div><div class="tx"><h4>翌月メニューの先行案内</h4><p>季節のおまかせを、どなたよりも先に。</p></div></div>
+      <div class="item reveal d2"><div class="ic"><span>◇</span></div><div class="tx"><h4>ワインの直販・セラー提供</h4><p>料理長が選ぶワインを会員価格で。お預かりセラーのご用意も。</p></div></div>
+      <div class="item reveal d3"><div class="ic"><span>◇</span></div><div class="tx"><h4>会員限定イベント</h4><p>生産者を招く一夜、希少な食材の会など、会員だけの体験を。</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- RESORT -->
+<section>
+  <div class="wrap">
+    <div class="resort reveal">
+      <div class="en">&amp; Resort</div>
+      <h3>食の扉は、<br>やがて旅へとつながる。</h3>
+      <p>祥瑞の会員制は、dhp都市開発グループが手がけるホテル・リゾートへの扉でもあります。ガストロノミーから、滞在へ。会員だけの宿泊体験を、これから。</p>
+    </div>
+  </div>
+</section>
+
+<!-- STEPS -->
+<section class="block-tight" id="join">
+  <div class="wrap">
+    <span class="sec-no reveal">06 — How to Join</span>
+    <h2 class="sec-title reveal">入会はかんたん 3 ステップ</h2>
+    <div class="steps">
+      <div class="step reveal d1"><div class="tx"><h4>LINEを友だち追加</h4><p>下のボタン、またはQRコードから祥瑞 公式LINEを追加。</p></div></div>
+      <div class="step reveal d2"><div class="tx"><h4>かんたん申込</h4><p>お名前・ご連絡先・ご希望店舗・個人／法人を入力するだけ。</p></div></div>
+      <div class="step reveal d3"><div class="tx"><h4>ご予約・ご来店</h4><p>会員専用のご予約導線でスムーズに。最初の一皿へ。</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="block-tight">
+  <div class="wrap">
+    <span class="sec-no reveal">07 — FAQ</span>
+    <h2 class="sec-title reveal">よくあるご質問</h2>
+    <div class="faq reveal d1">
+      <details><summary><span><span class="q">Q.</span>同伴者も会員価格で利用できますか？</span><span class="plus">+</span></summary><div class="a">はい。お連れ様も会員価格でご案内します。お支払いは会員ご本人のポイントとは別に、カードまたは現金で別精算となります。接待でのご利用に最適です。</div></details>
+      <details><summary><span><span class="q">Q.</span>ポイントは繰り越せますか？</span><span class="plus">+</span></summary><div class="a">原則としてその月内でのご利用をお願いしております（繰越の可否は規約に準じます）。月々のご来店を習慣にしていただける設計です。</div></details>
+      <details><summary><span><span class="q">Q.</span>法人での登録は可能ですか？</span><span class="plus">+</span></summary><div class="a">可能です。法人会員は複数の役員様でのご利用や、請求書・口座振替でのお支払いに対応します。詳細はお問い合わせください。</div></details>
+      <details><summary><span><span class="q">Q.</span>対象エリアは？</span><span class="plus">+</span></summary><div class="a">現在は関西圏（大阪・兵庫・和歌山・京都・奈良・滋賀）の皆様を中心に募集しております。</div></details>
+      <details><summary><span><span class="q">Q.</span>予約はどのように？</span><span class="plus">+</span></summary><div class="a">公式LINE経由のご予約に加え、接待・法人のお客様には会員専用のご対応をご用意します。</div></details>
+    </div>
+  </div>
+</section>
+
+<!-- FOOT CTA -->
+<section>
+  <div class="wrap">
+    <div class="foot-cta reveal">
+      <h3>百の扉を、<br>あなたのために。</h3>
+      <p>創業会員は先着100名。<br>まずはLINEのご登録から。</p>
+      <div class="qr"><div class="q">QR</div><small>LINE 公式</small></div>
+      <div class="cta-grp">
+        <a class="btn btn-line" href="#" data-line>LINEで登録して入会する</a>
+        <a class="btn btn-ghost" href="#" data-corp>法人でのご利用を相談する</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="mark">100 DOORS &amp; RESORT &amp; GASTRONOMY</div>
+  <div class="co">株式会社祥瑞　／　dhp都市開発グループ</div>
+  <div class="meta">北新地 大嵓埜　・　京都上七軒 大嵓埜　・　禅園 心斎橋　・　禅園 西梅田</div>
+  <div class="area">関西圏 限定 募集</div>
+</footer>
+
+<!-- STICKY -->
+<div class="sticky">
+  <div class="inner">
+    <a class="btn btn-line" href="#" data-line>LINEで入会する</a>
+    <a class="btn-mini" href="#corporate">法人の方</a>
+  </div>
+</div>
+
+<script>
+// scroll reveal
+const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.16,rootMargin:'0px 0px -8% 0px'});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+// hero reveals on load
+window.addEventListener('load',()=>{document.querySelectorAll('.hero .reveal').forEach(el=>el.classList.add('in'))});
+// LINE placeholder (replace href with real LINE add-friend URL)
+const LINE_URL="#"; // ←ここに公式LINEの友だち追加URLを設定
+document.querySelectorAll('[data-line]').forEach(a=>{if(LINE_URL!=="#")a.href=LINE_URL});
+</script>
+</body>
+</html>
