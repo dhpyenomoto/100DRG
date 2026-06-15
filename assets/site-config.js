@@ -15,6 +15,14 @@ window.SITE_CONFIG = {
   // 公式LINE 友だち追加URL（menu.html のCTAに反映。index.html は末尾の LINE_URL も参照）
   lineUrl: null,
 
+  // 入会・カード登録（自動課金）。join.html が参照。
+  // 方式A（簡易・ノーコード）: Stripeダッシュボードで作成した「継続課金のPayment Link」のURL
+  // 方式B（推奨・ログイン連携）: Cloud Functions の Checkout 作成エンドポイントURL
+  stripe: {
+    paymentLink: null,          // 例: "https://buy.stripe.com/xxxxxxxx"
+    checkoutFunctionUrl: null   // 例: "https://asia-northeast1-xxxx.cloudfunctions.net/createCheckout"
+  },
+
   firebase: null
 
   /* 例（Firebase コンソール → プロジェクトの設定 → マイアプリ の値）:

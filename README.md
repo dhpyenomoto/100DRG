@@ -9,6 +9,9 @@
 |---|---|
 | `index.html` | 会員サイト本体（ヒーロー／コンセプト／ブランドの使い分け／翌月のおまかせ先行案内／会員プラン／接待・法人／特典／リゾート／入会ステップ／FAQ／CTA） |
 | `menu.html` | 店舗ごとの「翌月のおまかせ」告知ページ（`?id=` で切替） |
+| `join.html` | ご入会・カード登録ページ（Stripe 継続課金） |
+| `functions/` | Cloud Functions（Stripe Checkout / Webhook） |
+| `firebase.json` | Firebase デプロイ設定（functions / rules） |
 | `tokushoho.html` | 特定商取引法に基づく表記 |
 | `privacy.html` | プライバシーポリシー |
 | `admin/index.html` | 管理画面（翌月のおまかせ編集ツール） |
@@ -62,6 +65,33 @@
 6. （任意）`content/omakase` ドキュメントが無い場合、管理画面で「公開」すると作成されます。
 
 > Firebase の構成値（apiKey等）は公開クライアントキーで、フロントに置いて問題ありません。アクセス制御は認証＋ルールで担保します。
+
+## 入会・カード登録（自動課金 / Stripe）
+
+会費はクレジットカード登録による自動継続課金（翌月分を前月末に課金）。`join.html` が入会導線です。
+`assets/site-config.js` の `stripe` 設定で挙動が切り替わります。
+
+| 方式 | 設定 | 用途 |
+|---|---|---|
+| A. Payment Link（ノーコード） | `stripe.paymentLink` にURL | 最短で開始。Stripe管理画面で継続課金リンクを作成して貼るだけ |
+| B. Checkout + Cloud Functions（推奨） | `stripe.checkoutFunctionUrl` にURL | ログイン会員と購読を紐付け。`functions/` をデプロイ |
+
+### 方式B セットアップ（`functions/`）
+1. Stripe で商品「ガストロノミー会員」と **継続課金 Price（月額 ¥55,000 税込）** を作成。
+2. `firebase login` 後、`functions/` で `npm install`。
+3. シークレット登録：
+   ```sh
+   firebase functions:secrets:set STRIPE_SECRET          # sk_live_xxx
+   firebase functions:secrets:set STRIPE_WEBHOOK_SECRET  # whsec_xxx
+   firebase functions:secrets:set STRIPE_PRICE_ID        # price_xxx（月額¥55,000）
+   ```
+4. `firebase deploy --only functions`（環境変数 `SITE_URL` に本番URL）。
+5. Stripe の Webhook 宛先に `…/stripeWebhook` を登録（`customer.subscription.*`）。
+6. デプロイされた `createCheckout` のURLを `assets/site-config.js` の `stripe.checkoutFunctionUrl` に設定。
+
+> `functions/index.js` は `createCheckout`（カード登録＋購読開始）と `stripeWebhook`（購読状態を
+> `users/{uid}.subscription` に同期）の実装。請求アンカーは当月末に設定（初月の按分は要件に応じ調整）。
+> シークレットキーはクライアントに置かず、すべて Functions 側で扱います。
 
 ## 公開（GitHub Pages）
 
